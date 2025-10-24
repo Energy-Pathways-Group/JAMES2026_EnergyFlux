@@ -1,0 +1,14 @@
+basedir = "/Users/Shared/CimRuns_June2025/output/";
+% basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_June2025_v2/output/';
+
+wvd = WVDiagnostics(basedir + replace(getRunParameters(18),"256","512") + ".nc");
+
+
+figureFolder = "./figures";
+if ~exist(figureFolder, 'dir')
+       mkdir(figureFolder)
+end
+
+%%
+fig = wvd.plotFluidDecompositionMultipanel(yForXZSlice=110e3,title="none",visible="off");
+exportgraphics(fig,figureFolder + "/" + "fluid_decomposition.png",Resolution=300)
