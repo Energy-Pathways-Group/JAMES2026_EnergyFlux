@@ -115,8 +115,8 @@ axK = nexttile(n); n = n+1;
 plot(radialWavelength,TZ_APV_kR,LineWidth=1.5), hold on
 plot(radialWavelength,TZ_A0_kR,LineWidth=1.5),
 plot(radialWavelength,TZ_Error_kR,Color=0*[1 1 1],LineWidth=1.5)
-plot(radialWavelength,TZ_ErrorNoRV_kR ,Color=0*[1 1 1],LineWidth=2.0,LineStyle=":");
-plot(radialWavelength,TZ_ErrorNoETA_kR,Color=0*[1 1 1],LineWidth=2.0,LineStyle="--");
+plot(radialWavelength,TZ_ErrorNoRV_kR ,Color=0*[1 1 1],LineWidth=1.5,LineStyle=":");
+plot(radialWavelength,TZ_ErrorNoETA_kR,Color=0*[1 1 1],LineWidth=1.5,LineStyle="--");
 set(gca,'XDir','reverse')
 xscale('log'); yscale('log')
 axis tight
@@ -210,8 +210,8 @@ axK = nexttile(n); n = n+1;
 plot(radialWavelength,TZ_APV_kR,LineWidth=1.5), hold on
 plot(radialWavelength,TZ_A0_kR,LineWidth=1.5),
 plot(radialWavelength,TZ_Error_kR,Color=0*[1 1 1],LineWidth=1.5)
-plot(radialWavelength,TZ_ErrorNoRV_kR ,Color=0*[1 1 1],LineWidth=2.0,LineStyle=":");
-plot(radialWavelength,TZ_ErrorNoETA_kR,Color=0*[1 1 1],LineWidth=2.0,LineStyle="--");
+plot(radialWavelength,TZ_ErrorNoRV_kR ,Color=0*[1 1 1],LineWidth=1.5,LineStyle=":");
+plot(radialWavelength,TZ_ErrorNoETA_kR,Color=0*[1 1 1],LineWidth=1.5,LineStyle="--");
 set(gca,'XDir','reverse')
 xscale('log'); yscale('log')
 axis tight
