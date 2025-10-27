@@ -27,7 +27,8 @@ energy_fluxes = wvd.quadraticEnergyFluxesTemporalAverage(timeIndices=analysisInd
 [J,K] = ndgrid(wvd.jWavenumber,wvd.kRadial);
 [Js,Ks] = ndgrid(js,ks);
 % flux_interp = @(v) diff(diff( cat(2,zeros(length(js)+1,1),cat(1,zeros(1,length(ks)),interpn(J,K,cumsum(cumsum(v,1),2),Js,Ks))), 1,1 ),1,2);
-flux_interp = @(v) diff(diff( cat(2,zeros(length(wvd.jWavenumber)+1,1),cat(1,zeros(1,length(wvd.kRadial)),interpn(Js,Ks,cumsum(cumsum(v,1),2),J,K,'spline'))), 1,1 ),1,2);
+% flux_interp = @(v) diff(diff( cat(2,zeros(length(wvd.jWavenumber)+1,1),cat(1,zeros(1,length(wvd.kRadial)),interpn(Js,Ks,cumsum(cumsum(v,1),2),J,K,'spline'))), 1,1 ),1,2);
+flux_interp = @(v) interpn(Js,Ks,v,J,K,'linear',0);
 
 C = orderedcolors("gem"); 
 colorDictionary = dictionary("geostrophic_mean_flow",{C(3,:)});
