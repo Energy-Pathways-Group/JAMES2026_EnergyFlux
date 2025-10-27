@@ -22,13 +22,7 @@ end
 %%
 
 energy_fluxes = wvd.quadraticEnergyFluxesTemporalAverage(timeIndices=analysisIndices);
-[inertial_fluxes_g, inertial_fluxes_w, ks, js] = wvd.quadraticEnergyPrimaryTriadFluxesTemporalAverage2D(timeIndices=analysisIndices);
-
-[J,K] = ndgrid(wvd.jWavenumber,wvd.kRadial);
-[Js,Ks] = ndgrid(js,ks);
-% flux_interp = @(v) diff(diff( cat(2,zeros(length(js)+1,1),cat(1,zeros(1,length(ks)),interpn(J,K,cumsum(cumsum(v,1),2),Js,Ks))), 1,1 ),1,2);
-% flux_interp = @(v) diff(diff( cat(2,zeros(length(wvd.jWavenumber)+1,1),cat(1,zeros(1,length(wvd.kRadial)),interpn(Js,Ks,cumsum(cumsum(v,1),2),J,K,'spline'))), 1,1 ),1,2);
-flux_interp = @(v) interpn(Js,Ks,v,J,K,'linear',0);
+[inertial_fluxes_g, inertial_fluxes_w, ks, js] = wvd.quadraticEnergyPrimaryTriadFluxesTemporalAverage2D(timeIndices=analysisIndices,outputGrid="full");
 
 C = orderedcolors("gem"); 
 colorDictionary = dictionary("geostrophic_mean_flow",{C(3,:)});
@@ -52,7 +46,7 @@ for i=1:length(fluxesOfInterest)
     forcing_fluxes(i).alpha = 1.0;
     forcing_fluxes(i).fancyName = energy_fluxes([energy_fluxes.name] == fluxesOfInterest{i}).fancyName;
 end
-forcing_fluxes(i+1).flux = flux_interp(inertial_fluxes_g([inertial_fluxes_g.name] == "tx-wwg").flux)/wvd.flux_scale;
+forcing_fluxes(i+1).flux = inertial_fluxes_g([inertial_fluxes_g.name] == "tx-wwg").flux/wvd.flux_scale;
 forcing_fluxes(i+1).color = 0.5*[1 1 1];
 forcing_fluxes(i+1).relativeAmplitude = 0.5;
 forcing_fluxes(i+1).alpha = 0.25;
@@ -73,11 +67,10 @@ fig = figure('Units', 'points', 'Position', [50 50 400 400]);
 set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
 clear ggg
-ggg.flux = flux_interp(inertial_fluxes_g([inertial_fluxes_g.name] == "ggg").flux)/wvd.flux_scale;
+ggg.flux = inertial_fluxes_g([inertial_fluxes_g.name] == "ggg").flux/wvd.flux_scale;
 fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=2e-3,kmax=2e-3,forcingFlux=forcing_fluxes,inertialFlux=ggg,addKEPEContours=true);
 title("ggg")
-% exportgraphics(fig,figureFolder + "/" + "energy_flux_quadratic_2D_flow_geostrophic.png",Resolution=300)
-return
+exportgraphics(fig,figureFolder + "/" + "energy_flux_quadratic_2D_flow_geostrophic.png",Resolution=300)
 %%
 
 fluxesOfInterest = {"adaptive_damping","inertial_forcing","M2_tidal_forcing","quadratic_bottom_friction"};
@@ -94,7 +87,7 @@ end
 forcing_fluxes(i).alpha = 0.25;
 
 % forcing_fluxes(i+1).flux = -inertial_fluxes(4).te_gmda/wvd.flux_scale;
-forcing_fluxes(i+1).flux = flux_interp(inertial_fluxes_w([inertial_fluxes_w.name] == "tx-wwg").flux)/wvd.flux_scale;
+forcing_fluxes(i+1).flux = inertial_fluxes_w([inertial_fluxes_w.name] == "tx-wwg").flux/wvd.flux_scale;
 forcing_fluxes(i+1).color = 0.5*[1 1 1];
 forcing_fluxes(i+1).relativeAmplitude = 0.5;
 forcing_fluxes(i+1).alpha = 1.0;
@@ -109,16 +102,17 @@ end
 fig = figure('Units', 'points', 'Position', [50 50 400 400]);
 set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
-wwg.flux = flux_interp(inertial_fluxes_w([inertial_fluxes_w.name] == "wwg").flux)/wvd.flux_scale;
+wwg.flux = inertial_fluxes_w([inertial_fluxes_w.name] == "wwg").flux/wvd.flux_scale;
 fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=2e-3,kmax=2e-3,forcingFlux=forcing_fluxes,inertialFlux=wwg,addFrequencyContours=true);
 title("wwg")
-% exportgraphics(fig,figureFolder + "/" + "energy_flux_quadratic_2D_flow_wave_wwg.png",Resolution=300)
+exportgraphics(fig,figureFolder + "/" + "energy_flux_quadratic_2D_flow_wave_wwg.png",Resolution=300)
 
 
 %%
 fig = figure('Units', 'points', 'Position', [50 50 400 400]);
 set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
+www.flux = inertial_fluxes_w([inertial_fluxes_w.name] == "www").flux/wvd.flux_scale;
 fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=2e-3,kmax=2e-3,forcingFlux=forcing_fluxes,inertialFlux=www,addFrequencyContours=true);
 title("www")
-% exportgraphics(fig,figureFolder + "/" + "energy_flux_quadratic_2D_flow_wave_www.png",Resolution=300)
+exportgraphics(fig,figureFolder + "/" + "energy_flux_quadratic_2D_flow_wave_www.png",Resolution=300)
