@@ -15,11 +15,16 @@ timeIndicesArray{1} = 2801:3001;
 wvdArray{2} = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
 timeIndicesArray{2} = 51:251;
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %% Figure
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+style = "pseudoradial";
+style = "radial";
 
 fig = figure('Units', 'points', 'Position', [50 50 600 400]);
 set(gcf,'PaperPositionMode','auto')
@@ -36,14 +41,22 @@ for iWVD = 1:2
     end
     timeIndices = timeIndicesArray{iWVD};
 
-    enstrophy_fluxes = wvd.exactEnstrophyFluxesTemporalAverage(timeIndices = 51:251);
+    if style == "pseudoradial"
+        kRadial = wvd.kPseudoRadial;
+        filter = @(v) wvd.transformToPseudoRadialWavenumber(EnergyReservoir.geostrophic_mda,v);
+    else
+        kRadial = wvd.kRadial;
+        filter = @(v) sum(v,1);
+    end
+
+    enstrophy_fluxes = wvd.exactEnstrophyFluxesTemporalAverage(timeIndices =timeIndices);
 
     % rename quadratic bottom friction for legend
     enstrophy_fluxes([enstrophy_fluxes.name]=="quadratic_bottom_friction").fancyName = "bottom friction";
     enstrophy_fluxes([enstrophy_fluxes.name]=="nonlinear_advection").fancyName = "u{\nabla}u";
 
     % wavelength axis
-    radialWavelength = 2*pi./wvd.kPseudoRadial/1000;
+    radialWavelength = 2*pi./kRadial/1000;
     radialWavelength(1) = 1.5*radialWavelength(2);
 
     if iWVD==1
@@ -80,7 +93,7 @@ for iWVD = 1:2
     col.waveBold = C(5,:);
     col.geoBold = C(6,:);
 
-    yl = [-3.2,2.0];
+    yl = [-3.2,2.5];
 
     % line widths
     options.triadLW = 2; % triad
@@ -118,14 +131,14 @@ for iWVD = 1:2
 
     set(gca,'ColorOrderIndex',1)
     idx = [enstrophy_fluxes.name] == "nonlinear_advection";
-    v = wvd.transformToPseudoRadialWavenumber(EnergyReservoir.geostrophic_mda,enstrophy_fluxes(idx).Z0);
+    v = filter(enstrophy_fluxes(idx).Z0);
     plot(ax,radialWavelength,options.filter(v/wvd.z_flux_scale),LineWidth=options.triadLW,Color=0*[1 1 1],LineStyle="-",DisplayName="nonlinear advection"), hold on
 
     geostrophic_forcings = ["quadratic_bottom_friction","adaptive_damping","geostrophic_mean_flow"];
     set(gca,'ColorOrderIndex',1)
     for i=1:length(geostrophic_forcings)
         idx = [enstrophy_fluxes.name] == geostrophic_forcings(i);
-        v = wvd.transformToPseudoRadialWavenumber(EnergyReservoir.geostrophic_mda,enstrophy_fluxes(idx).Z0);
+        v = filter(enstrophy_fluxes(idx).Z0);
         plot(ax,radialWavelength,options.filter(v/wvd.z_flux_scale),LineWidth=options.forcingLW,DisplayName=enstrophy_fluxes(idx).fancyName)
     end
 
@@ -163,4 +176,4 @@ for iWVD = 1:2
     end
 end
 
-exportgraphics(fig,figureFolder + "/" + "enstrophy_flux1D.png",Resolution=300)
+% exportgraphics(fig,figureFolder + "/" + "enstrophy_flux1D.png",Resolution=300)
