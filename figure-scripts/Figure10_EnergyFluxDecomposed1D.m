@@ -29,8 +29,9 @@ wvd = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") +
 %%
 analysisTimes = 51:251;
 
-shouldSaveFigure = true;
+shouldSaveFigure = false;
 
+wvd.pseudoRadialBinning = "k2+j2";
 
 
 C = orderedcolors("gem"); 

@@ -8,9 +8,10 @@ basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
 % wvd18 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
 % analysisIndices = 51:251;
 
-runNumber=9; runName = "non-hydrostatic: geostrophic + waves";
-wvd = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","256") + ".nc");
+runNumber=18; runName = "non-hydrostatic: geostrophic + waves";
+wvd = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
 analysisIndices = 2751:3001;
+analysisIndices = 51:251;
 
 figureFolder = "./figures";
 if ~exist(figureFolder, 'dir')

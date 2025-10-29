@@ -38,13 +38,19 @@ wvdArray = {wvd1,wvd9,wvd18};
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+shouldShowPseudoRadialPlot = true;
 
-
-fig = figure('Units', 'points', 'Position', [50 50 700 350]);
-set(gcf,'PaperPositionMode','auto')
-set(gcf, 'Color', 'w');
-
-tl = tiledlayout(1,2,TileSpacing="compact");
+if shouldShowPseudoRadialPlot
+    fig = figure('Units', 'points', 'Position', [50 50 900 350]);
+    set(gcf,'PaperPositionMode','auto')
+    set(gcf, 'Color', 'w');
+    tl = tiledlayout(1,3,TileSpacing="compact");
+else
+    fig = figure('Units', 'points', 'Position', [50 50 700 350]);
+    set(gcf,'PaperPositionMode','auto')
+    set(gcf, 'Color', 'w');
+    tl = tiledlayout(1,2,TileSpacing="compact");
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -60,6 +66,7 @@ wvd = wvd18;
 for i=1:length(wvdArray)
     n = 1;
     wvd = wvdArray{i};
+    wvd.pseudoRadialBinning = "adaptive";
 
 if wvd.diagnosticsHasExplicitAntialiasing
     wvt = wvd.wvt_aa;
@@ -106,7 +113,7 @@ xscale('log'); yscale('log')
 axis tight
 % title('Radial Wavenumber Spectrum')
 ylabel('energy (m^{3} s^{-2})');
-xlabel('wavelength (km)')
+xlabel('horizontal wavelength (km)')
 ylim(10.^options.clim);
 
 
@@ -120,26 +127,26 @@ plot(radiusOfDeformation,TE_Apm_j,LineWidth=2,LineStyle="--")
 set(gca,'XDir','reverse')
 yscale('log'); xscale('log');
 axis tight
-xlabel('wavelength of deformation (km)');
+xlabel('deformation wavelength (km)');
 % title('Vertical Mode Spectrum')
 ylim(10.^options.clim);
 % set(gca,'XTick',[])
 set(gca,'YTick',[])
 
-% axJ = nexttile(n); n = n+1;
-% set(gca,'ColorOrderIndex',i)
-% p(2) = plot(wvt.j,TE_A0_j); hold on
-% set(gca,'ColorOrderIndex',i)
-% plot(wvt.j,TE_Apm_j,LineStyle="--")
-% % set(gca,'XDir','reverse')
-% yscale('log');% xscale('log');
-% axis tight
-% xlabel('mode (j)');
-% title('Vertical Mode Spectrum')
-% ylim(10.^options.clim);
-% % set(gca,'XTick',[])
-% set(gca,'YTick',[])
-
+if shouldShowPseudoRadialPlot
+    axJ = nexttile(n); n = n+1;
+    set(gca,'ColorOrderIndex',i)
+    plot(pseudoRadialWavelength,TE_A0_kPseudo,LineWidth=2); hold on
+    set(gca,'ColorOrderIndex',i)
+    plot(pseudoRadialWavelength,TE_Apm_kPseudo,LineWidth=2,LineStyle="--")
+    set(gca,'XDir','reverse')
+    yscale('log'); xscale('log');
+    axis tight
+    xlabel('pseudo-wavelength (km)');
+    xlim([radiusOfDeformation(end) pseudoRadialWavelength(2)])
+    ylim(10.^options.clim);
+    set(gca,'YTick',[])
+end
 
 end
 
@@ -157,22 +164,49 @@ plot(rw,slope,LineStyle="--",Color=0*[1 1 1])
 text(10,3e-2,"\lambda^{2}")
 
 nexttile(2)
-rw = [2e2 7e0];
-slope = (0.2e-7)*rw.^(3); % 3.5e-10 @ 1e2
+rw = [1e2 7e0];
+slope = (0.4e-7)*rw.^(3); % 3.5e-10 @ 1e2
 plot(rw,slope,LineStyle="--",Color=0*[1 1 1])
 text(50,1e-3,"\lambda^{3}")
 
 rw = [50 7e0];
-slope = (1e-3)*rw.^(2); % 3.5e-10 @ 1e2
+slope = (8e-5)*rw.^(2); % 0.001 @ 7
 plot(rw,slope,LineStyle="--",Color=0*[1 1 1])
-text(10,1e-1,"\lambda^{2}")
+text(10,1.1e-2,"\lambda^{2}")
+
+rw = [50 7e0];
+slope = (3e-2)*rw.^(1); % 0.05 @  7
+plot(rw,slope,LineStyle="--",Color=0*[1 1 1])
+text(10,5e-1,"\lambda^{1}")
+
+if shouldShowPseudoRadialPlot
+    nexttile(3)
+    rw = [1e2 7e0];
+    slope = (0.8e-7)*rw.^(3); % 3.5e-10 @ 1e2
+    plot(rw,slope,LineStyle="--",Color=0*[1 1 1])
+    text(50,1e-3,"\lambda^{3}")
+
+    rw = [50 7e0];
+    slope = (8e-5)*rw.^(2); % 0.001 @ 7
+    plot(rw,slope,LineStyle="--",Color=0*[1 1 1])
+    text(10,1.1e-2,"\lambda^{2}")
+
+    rw = [50 7e0];
+    slope = (3e-2)*rw.^(1); % 0.05 @  7
+    plot(rw,slope,LineStyle="--",Color=0*[1 1 1])
+    text(10,5e-1,"\lambda^{1}")
+end
 
 
 nexttile(1)
 
 legend([p(1), p(2) p(3) p(4) p(5) p(6)],'HS-G: geostrophic','HS-G: wave','HS-GW: geostrophic','HS-GW: wave','NHS-GW: geostrophic','NHS-GW: wave')
 
-exportgraphics(fig,figureFolder + "/" + "energy_spectrum_simple.png",Resolution=300)
+if shouldShowPseudoRadialPlot
+    exportgraphics(fig,figureFolder + "/" + "energy_spectrum_3panel.png",Resolution=300)
+else
+    exportgraphics(fig,figureFolder + "/" + "energy_spectrum_simple.png",Resolution=300)
+end
 
 % nexttile(2)
 % rw = [2e2 7e0];
