@@ -29,7 +29,7 @@ wvd = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") +
 %%
 analysisTimes = 51:251;
 
-shouldSaveFigure = false;
+shouldSaveFigure = true;
 
 wvd.pseudoRadialBinning = "k2+j2";
 

@@ -67,7 +67,6 @@ for i=1:length(wvdArray)
     n = 1;
     wvd = wvdArray{i};
     wvd.pseudoRadialBinning = "adaptive";
-
 if wvd.diagnosticsHasExplicitAntialiasing
     wvt = wvd.wvt_aa;
 else
