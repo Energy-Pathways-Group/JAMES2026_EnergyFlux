@@ -3,9 +3,11 @@
 % basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
 basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
 
-wvd1 = WVDiagnostics(basedir + replace(getRunParameters(1),"256","512") + ".nc");
-wvd9 = WVDiagnostics(basedir + replace(getRunParameters(9),"256","512") + ".nc");
-wvd18 = WVDiagnostics(basedir + replace(getRunParameters(18),"256","512") + ".nc");
+resolution = 256;
+
+wvd1 = WVDiagnostics(basedir + replace(getRunParameters(1),"256",string(resolution)) + ".nc");
+wvd9 = WVDiagnostics(basedir + replace(getRunParameters(9),"256",string(resolution)) + ".nc");
+wvd18 = WVDiagnostics(basedir + replace(getRunParameters(18),"256",string(resolution)) + ".nc");
 
 %%
 
@@ -39,7 +41,7 @@ end
 
 %%
 
-figPos = [50 50 600 300];
+figPos = [50 50 700 300];
 fig = figure(Units='points',Position=figPos);
 tl = tiledlayout(1,2,"TileSpacing","tight");
 
@@ -124,7 +126,7 @@ ylabel(tl,'power (m^2/s)')
 ax2.YTickLabels={};
 
 
-exportgraphics(fig,figureFolder + "/" + "moorings_total_velocity.png",Resolution=300)
+exportgraphics(fig,figureFolder + "/" + "moorings_total_velocity_" + resolution + ".png",Resolution=300)
 
 % fig1 = wvd1.plotMooringRotarySpectrum(shouldShowLegend=false,title="hydrostatic: geostrophic",shouldShowSpectralTitles=false);
 % fig9 = wvd9.plotMooringRotarySpectrum(shouldShowLegend=false,title="hydrostatic: geostrophic + waves",shouldShowSpectralTitles=false);
