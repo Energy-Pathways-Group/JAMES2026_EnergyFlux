@@ -1,8 +1,7 @@
 % basedir = "/Users/Shared/CimRuns_June2025/output/";
-basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
+% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
 % basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
-% basedir = '/Users/cwortham/Documents/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns/output/';
-% basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_June2025_v2/output/';
+basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
 
 runNumber=1; runName = "hydrostatic: geostrophic";
 wvd1 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
@@ -51,9 +50,9 @@ end
 fig = figure('Units', 'points', 'Position', [50 50 400 400]);
 set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
-fig = wvd.plotPoissonFlowOverContours(nLevels=20,figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=quiverScale,jmax=2e-3,kmax=2e-3,forcingFlux=forcing_fluxes1,inertialFlux=flux_advective,addFrequencyContours=false,addKEPEContours=true);
+fig = wvd.plotPoissonFlowOverContours(nLevels=20,figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=quiverScale,jmax=2e-3,kmax=2e-3,forcingFlux=forcing_fluxes1,inertialFlux=flux_advective,addFrequencyContours=false,addKEPEContours=false);
 ax = gca;
-ax.Title.String = "potential enstrophy flux: HS-G";
+ax.Title.String = "potential enstrophy flux: mean flow forcing";
 exportgraphics(fig,figureFolder + "/" + "enstrophy_flux_exact_2D_flow_run1.png",Resolution=300)
 
 
@@ -93,9 +92,9 @@ end
 fig = figure('Units', 'points', 'Position', [50 50 400 400]);
 set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
-fig = wvd.plotPoissonFlowOverContours(nLevels=20,figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=quiverScale,jmax=2e-3,kmax=2e-3,forcingFlux=forcing_fluxes18,inertialFlux=flux_advective,addFrequencyContours=false,addKEPEContours=true);
+fig = wvd.plotPoissonFlowOverContours(nLevels=20,figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=quiverScale,jmax=2e-3,kmax=2e-3,forcingFlux=forcing_fluxes18,inertialFlux=flux_advective,addFrequencyContours=false,addKEPEContours=false);
 set(gca,'YTickLabel',[]);
 set(gca,'YLabel',[]);
 ax = gca;
-ax.Title.String = "potential enstrophy flux: NHS-GW";
+ax.Title.String = "potential enstrophy flux: mean flow & wave forcing";
 exportgraphics(fig,figureFolder + "/" + "enstrophy_flux_exact_2D_flow_run18.png",Resolution=300)
