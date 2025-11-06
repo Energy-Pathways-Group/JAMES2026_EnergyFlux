@@ -1,6 +1,7 @@
 % basedir = "/Users/Shared/CimRuns_June2025/output/";
-basedir = '/Users/cwortham/Documents/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns/output/';
-basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
+% basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
+basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
+
 
 wvd = WVDiagnostics(basedir + replace(getRunParameters(18),"256","512") + ".nc");
 
@@ -47,8 +48,8 @@ cv_mooring = shiftdim( u + sqrt(-1)*v, 2);
 Spp = mean(Spp,3);
 Snn = mean(Snn,3);
 
-plt1 = loglog(ax1,omega_p*86400/2/pi,fliplr(Snn),'-','Color',col.geoBold,'DisplayName','negative geostrophic',LineWidth=2);
-plt2 = loglog(ax1,omega_p*86400/2/pi,fliplr(Spp),'-','Color',col.geoBold,'DisplayName','positive geostrophic',LineWidth=1);
+plt1 = loglog(ax1,omega_p*86400/2/pi,fliplr(Snn)*2*pi/86400,'-','Color',col.geoBold,'DisplayName','negative geostrophic',LineWidth=2);
+plt2 = loglog(ax1,omega_p*86400/2/pi,fliplr(Spp)*2*pi/86400,'-','Color',col.geoBold,'DisplayName','positive geostrophic',LineWidth=1);
 
 
 % wave velocity
@@ -62,12 +63,12 @@ cv_mooring = shiftdim( u + sqrt(-1)*v, 2);
 Spp = mean(Spp,3);
 Snn = mean(Snn,3);
 
-plt3 = loglog(ax1,omega_p*86400/2/pi,fliplr(Snn),'-','Color',col.waveBold,'DisplayName','negative wave',LineWidth=2);
-plt4 = loglog(ax1,omega_p*86400/2/pi,fliplr(Spp),'-','Color',col.waveBold,'DisplayName','positive wave',LineWidth=1);
+plt3 = loglog(ax1,omega_p*86400/2/pi,fliplr(Snn)*2*pi/86400,'-','Color',col.waveBold,'DisplayName','negative wave',LineWidth=2);
+plt4 = loglog(ax1,omega_p*86400/2/pi,fliplr(Spp)*2*pi/86400,'-','Color',col.waveBold,'DisplayName','positive wave',LineWidth=1);
 
 legend(ax1,[plt1,plt2,plt3,plt4],'location','southwest')
 xlabel('frequency (cycles per day)')
-ylabel('power (m^2/s)')
+ylabel('power (m^2 s^{-2}/cpd)')
 
 % reference frequency lines
 M2Period = 12.420602*3600; % M2 tidal period, s
