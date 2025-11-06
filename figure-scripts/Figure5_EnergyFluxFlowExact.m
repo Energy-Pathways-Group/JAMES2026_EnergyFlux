@@ -1,8 +1,8 @@
 % basedir = "/Users/Shared/CimRuns_June2025/output/";
-basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
+% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
 % basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
 % basedir = '/Users/cwortham/Documents/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns/output/';
-% basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_June2025_v2/output/';
+basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
 
 
 wvd1 = WVDiagnostics(basedir + replace(getRunParameters(1),"256","512") + ".nc");
@@ -38,7 +38,7 @@ for i=1:length(fluxesOfInterest)
     forcing_fluxes1(i).color=colorDictionary{fluxesOfInterest{i}};
     forcing_fluxes1(i).flux = energy_fluxes([energy_fluxes.name] == fluxesOfInterest{i}).te/wvd.flux_scale;
     forcing_fluxes1(i).relativeAmplitude = 1.0;
-    forcing_fluxes1(i).alpha = 1.0;
+    forcing_fluxes1(i).alpha = 0.6;%1.0;
     forcing_fluxes1(i).fancyName = energy_fluxes([energy_fluxes.name] == fluxesOfInterest{i}).fancyName;
 end
 
@@ -55,7 +55,7 @@ set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
 fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=2e-3,kmax=2e-3,forcingFlux=forcing_fluxes1,inertialFlux=flux_advective,addFrequencyContours=false,addKEPEContours=false);
 ax = gca;
-ax.Title.String = "energy flux: HS-G";
+ax.Title.String = "energy flux: mean flow forcing";
 exportgraphics(fig,figureFolder + "/" + "energy_flux_exact_2D_flow_run1.png",Resolution=300)
 
 %%
@@ -79,7 +79,7 @@ for i=1:length(fluxesOfInterest)
     forcing_fluxes18(i).color=colorDictionary{fluxesOfInterest{i}};
     forcing_fluxes18(i).flux = energy_fluxes([energy_fluxes.name] == fluxesOfInterest{i}).te/wvd.flux_scale;
     forcing_fluxes18(i).relativeAmplitude = 1.0;
-    forcing_fluxes18(i).alpha = 1.0;
+    forcing_fluxes18(i).alpha = 0.6;%1.0;
     forcing_fluxes18(i).fancyName = energy_fluxes([energy_fluxes.name] == fluxesOfInterest{i}).fancyName;
 end
 
@@ -98,7 +98,7 @@ fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransi
 set(gca,'YTickLabel',[]);
 set(gca,'YLabel',[]);
 ax = gca;
-ax.Title.String = "energy flux: NHS-GW";
+ax.Title.String = "energy flux: mean flow & wave forcing";
 exportgraphics(fig,figureFolder + "/" + "energy_flux_exact_2D_flow_run18.png",Resolution=300)
 
 
