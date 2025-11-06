@@ -83,9 +83,9 @@ for i=1:length(fluxesOfInterest)
     forcing_fluxes(i).flux = energy_fluxes([energy_fluxes.name] == fluxesOfInterest{i}).(reservoirName)/wvd.flux_scale;
     forcing_fluxes(i).fancyName = energy_fluxes([energy_fluxes.name] == fluxesOfInterest{i}).fancyName;
     forcing_fluxes(i).relativeAmplitude = 1.0;
-    forcing_fluxes(i).alpha = 0.6;%1.0;
+    forcing_fluxes(i).alpha = 1.0;
 end
-forcing_fluxes(i).alpha = 0.6;
+forcing_fluxes(i).alpha = 0.7;
 
 % forcing_fluxes(i+1).flux = -inertial_fluxes(4).te_gmda/wvd.flux_scale;
 forcing_fluxes(i+1).flux = inertial_fluxes_w([inertial_fluxes_w.name] == "tx-wwg").flux/wvd.flux_scale;

@@ -35,7 +35,7 @@ for i=1:length(fluxesOfInterest)
     forcing_fluxes1(i).color=colorDictionary{fluxesOfInterest{i}};
     forcing_fluxes1(i).flux = enstrophy_fluxes([enstrophy_fluxes.name] == fluxesOfInterest{i}).Z0/wvd.z_flux_scale;
     forcing_fluxes1(i).relativeAmplitude = 1.0;
-    forcing_fluxes1(i).alpha = .8;%1.0;
+    forcing_fluxes1(i).alpha = 1.0;
     forcing_fluxes1(i).fancyName = enstrophy_fluxes([enstrophy_fluxes.name] == fluxesOfInterest{i}).fancyName;
 end
 
@@ -77,7 +77,7 @@ for i=1:length(fluxesOfInterest)
     forcing_fluxes18(i).color=colorDictionary{fluxesOfInterest{i}};
     forcing_fluxes18(i).flux = enstrophy_fluxes([enstrophy_fluxes.name] == fluxesOfInterest{i}).Z0/wvd.z_flux_scale;
     forcing_fluxes18(i).relativeAmplitude = 1.0;
-    forcing_fluxes18(i).alpha = .8;%1.0;
+    forcing_fluxes18(i).alpha = 1.0;
     forcing_fluxes18(i).fancyName = enstrophy_fluxes([enstrophy_fluxes.name] == fluxesOfInterest{i}).fancyName;
 end
 

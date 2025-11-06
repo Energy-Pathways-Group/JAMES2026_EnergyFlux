@@ -38,7 +38,7 @@ for i=1:length(fluxesOfInterest)
     forcing_fluxes1(i).color=colorDictionary{fluxesOfInterest{i}};
     forcing_fluxes1(i).flux = energy_fluxes([energy_fluxes.name] == fluxesOfInterest{i}).te/wvd.flux_scale;
     forcing_fluxes1(i).relativeAmplitude = 1.0;
-    forcing_fluxes1(i).alpha = 0.6;%1.0;
+    forcing_fluxes1(i).alpha = 1.0;
     forcing_fluxes1(i).fancyName = energy_fluxes([energy_fluxes.name] == fluxesOfInterest{i}).fancyName;
 end
 
@@ -79,7 +79,7 @@ for i=1:length(fluxesOfInterest)
     forcing_fluxes18(i).color=colorDictionary{fluxesOfInterest{i}};
     forcing_fluxes18(i).flux = energy_fluxes([energy_fluxes.name] == fluxesOfInterest{i}).te/wvd.flux_scale;
     forcing_fluxes18(i).relativeAmplitude = 1.0;
-    forcing_fluxes18(i).alpha = 0.6;%1.0;
+    forcing_fluxes18(i).alpha = 1.0;
     forcing_fluxes18(i).fancyName = energy_fluxes([energy_fluxes.name] == fluxesOfInterest{i}).fancyName;
 end
 
