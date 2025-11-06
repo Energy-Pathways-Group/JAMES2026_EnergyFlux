@@ -1,5 +1,7 @@
 % basedir = "/Users/Shared/CimRuns_June2025/output/";
-basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
+% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
+basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
+
 wvd1 = WVDiagnostics(basedir + replace(getRunParameters(1),"256","512") + ".nc");
 wvd9 = WVDiagnostics(basedir + replace(getRunParameters(9),"256","512") + ".nc");
 wvd18 = WVDiagnostics(basedir + replace(getRunParameters(18),"256","512") + ".nc");
@@ -34,7 +36,7 @@ col{"sink"} = [245 194 193]/255;
 order = ["geostrophic", "wave", "damped_geostrophic", "damped_wave"];
 
 
-[~, boxDiagram] = wvd1.plotSourcesSinksForReservoirGroup(customForcing=customForcing,customNames=custom_names,customColors=col,customReservoirOrder=order,shouldShowUnits=true,timeIndices=timeIndices,title="hydrostatic, geostrophic",visible="off");
+[~, boxDiagram] = wvd1.plotSourcesSinksForReservoirGroup(customForcing=customForcing,customNames=custom_names,customColors=col,customReservoirOrder=order,shouldShowUnits=true,timeIndices=timeIndices,title="mean flow forcing",visible="off");
 sourcesBoxes = boxDiagram.rows{1};
 sourcesBoxes(1).Position(1) = 0;
 
@@ -55,7 +57,7 @@ boxDiagram.layoutArrows();
 fig1 = boxDiagram.draw();
 
 %%
-[~, boxDiagram] = wvd9.plotSourcesSinksForReservoirGroup(customForcing=customForcing,customNames=custom_names,customColors=col,customReservoirOrder=order,shouldShowUnits=true,timeIndices=timeIndices,title="hydrostatic, geostrophic + wave",visible="off");
+[~, boxDiagram] = wvd9.plotSourcesSinksForReservoirGroup(customForcing=customForcing,customNames=custom_names,customColors=col,customReservoirOrder=order,shouldShowUnits=true,timeIndices=timeIndices,title="mean flow & wave forcing, hydrostatic",visible="off");
 dampedBoxes = boxDiagram.rows{3};
 dampedBoxes(1).Size = [3.5 2.0];
 dampedBoxes(2).Size = [3.5 2.0];
@@ -73,7 +75,7 @@ boxDiagram.arrows(4).LabelPosition = [8 -1.90];
 fig9 = boxDiagram.draw();
 
 %%
-[~, boxDiagram] = wvd18.plotSourcesSinksForReservoirGroup(customForcing=customForcing,customNames=custom_names,customColors=col,customReservoirOrder=order,shouldShowUnits=true,timeIndices=timeIndices,title="non-hydrostatic, geostrophic + wave",visible="off");
+[~, boxDiagram] = wvd18.plotSourcesSinksForReservoirGroup(customForcing=customForcing,customNames=custom_names,customColors=col,customReservoirOrder=order,shouldShowUnits=true,timeIndices=timeIndices,title="mean flow & wave forcing",visible="off");
 dampedBoxes = boxDiagram.rows{3};
 dampedBoxes(1).Size = [3.5 2.0];
 dampedBoxes(2).Size = [3.5 2.0];
