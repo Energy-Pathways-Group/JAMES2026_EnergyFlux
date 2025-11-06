@@ -1,7 +1,7 @@
 % basedir = "/Users/Shared/CimRuns_June2025/output/";
-basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
+% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
 % basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
-
+basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
 
 figureFolder = "./figures";
 if ~exist(figureFolder, 'dir')
@@ -11,13 +11,14 @@ end
 runNumber=1; runName = "hydrostatic: geostrophic";
 wvd1 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
 
-runNumber=9; runName = "hydrostatic: geostrophic + waves";
-wvd9 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
+% runNumber=9; runName = "hydrostatic: geostrophic + waves";
+% wvd9 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
 
 runNumber=18; runName = "non-hydrostatic: geostrophic + waves";
 wvd18 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
 
-wvdArray = {wvd1,wvd9,wvd18};
+% wvdArray = {wvd1,wvd9,wvd18};
+wvdArray = {wvd1,wvd18};
 
 %%
 % 
@@ -199,7 +200,8 @@ end
 
 nexttile(1)
 
-legend([p(1), p(2) p(3) p(4) p(5) p(6)],'HS-G: geostrophic','HS-G: wave','HS-GW: geostrophic','HS-GW: wave','NHS-GW: geostrophic','NHS-GW: wave')
+% legend([p(1), p(2) p(3) p(4) p(5) p(6)],'HS-G: geostrophic','HS-G: wave','HS-GW: geostrophic','HS-GW: wave','NHS-GW: geostrophic','NHS-GW: wave')
+legend([p(1), p(2) p(3) p(4)],'mean flow: geostrophic','mean flow: wave','mean flow & wave: geostrophic','mean flow & wave: wave')
 
 if shouldShowPseudoRadialPlot
     exportgraphics(fig,figureFolder + "/" + "energy_spectrum_3panel.png",Resolution=300)
