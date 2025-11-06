@@ -1,8 +1,8 @@
-basedir = "/Users/Shared/CimRuns_June2025/output/";
-basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
+% basedir = "/Users/Shared/CimRuns_June2025/output/";
+% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
 % basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
 % basedir = '/Users/cwortham/Documents/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns/output/';
-% basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_June2025/output/';
+basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
 
 figureFolder = "./figures";
 if ~exist(figureFolder, 'dir')
@@ -16,7 +16,7 @@ runNumber=18;
 wvd18 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
 
 wvdArray = {wvd1,wvd18};
-runNames = {"HS-G","NHS-GW"};
+runNames = {"mean flow forcing","mean flow & wave forcing"};
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -49,7 +49,7 @@ options.clim = [-11 -7.0];
 options.jlim = [0 40];
 options.klim = [5 500];
 
-units_scale = 1/(wvt.f*wvt.f);
+units_scale = 1/(wvd18.wvt.f*wvd18.wvt.f);
 
 for iWVD=1:length(wvdArray)
 
