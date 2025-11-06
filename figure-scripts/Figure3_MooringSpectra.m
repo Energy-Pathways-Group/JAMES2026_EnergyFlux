@@ -1,19 +1,18 @@
 % basedir = "/Users/Shared/CimRuns_June2025/output/";
-% basedir = '/Users/cwortham/Documents/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns/output/';
 % basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
-basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
+% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
+basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
 
-resolution = 256;
 
-wvd1 = WVDiagnostics(basedir + replace(getRunParameters(1),"256",string(resolution)) + ".nc");
-wvd9 = WVDiagnostics(basedir + replace(getRunParameters(9),"256",string(resolution)) + ".nc");
-wvd18 = WVDiagnostics(basedir + replace(getRunParameters(18),"256",string(resolution)) + ".nc");
+wvd1 = WVDiagnostics(basedir + replace(getRunParameters(1),"256","512") + ".nc");
+% wvd9 = WVDiagnostics(basedir + replace(getRunParameters(9),"256","512") + ".nc");
+wvd18 = WVDiagnostics(basedir + replace(getRunParameters(18),"256","512") + ".nc");
 
 %%
 
 wvdArray{1} = wvd1;
-wvdArray{2} = wvd9;
-wvdArray{3} = wvd18;
+wvdArray{2} = wvd18;
+% wvdArray{3} = wvd9;
 
 figureFolder = "./figures";
 if ~exist(figureFolder, 'dir')
@@ -41,11 +40,11 @@ end
 
 %%
 
-figPos = [50 50 700 300];
+figPos = [50 50 600 275];
 fig = figure(Units='points',Position=figPos);
 tl = tiledlayout(1,2,"TileSpacing","tight");
 
-for i=1:3
+for i=1:length(wvdArray)
     wvd = wvdArray{i};
 
     t = wvd.wvfile.readVariables('mooring/t');
@@ -81,17 +80,20 @@ for i=1:3
     % set(ax1,'ColorOrder',cmap)
     % set(ax2,'ColorOrder',cmap)
     % negative
-    plt1 = loglog(ax1,omega_p*86400/2/pi,fliplr(Snn(:,2)),Color=C(i,:),LineWidth=2);
-    plt1 = loglog(ax1,omega_p*86400/2/pi,fliplr(Snn(:,1)),Color=C(i,:),LineWidth=1);
+    plt1 = loglog(ax1,omega_p*86400/2/pi,fliplr(Snn(:,2))*2*pi/86400,Color=C(i,:),LineWidth=2);
+    plt1 = loglog(ax1,omega_p*86400/2/pi,fliplr(Snn(:,1))*2*pi/86400,Color=C(i,:),LineWidth=1);
     % set(plt1,{'DisplayName'},legendCell)
     % positive
-    plt2 = loglog(ax2,omega_p*86400/2/pi,fliplr(Spp(:,2)),Color=C(i,:),LineWidth=2);
-    plt2 = loglog(ax2,omega_p*86400/2/pi,fliplr(Spp(:,1)),Color=C(i,:),LineWidth=1);
+    plt2 = loglog(ax2,omega_p*86400/2/pi,fliplr(Spp(:,2))*2*pi/86400,Color=C(i,:),LineWidth=2);
+    plt2 = loglog(ax2,omega_p*86400/2/pi,fliplr(Spp(:,1))*2*pi/86400,Color=C(i,:),LineWidth=1);
     % set(plt2,{'DisplayName'},legendCell)
 
 end
 
-legend(ax2,{"HS-G 100m","HS-G 2500m","HS-GW 100m","HS-GW 2500m","NHS-GW 100m","NHS-GW 2500m"},'location','best')
+% legend(ax2,{"HS-G 100m","HS-G 2500m","HS-GW 100m","HS-GW 2500m","NHS-GW 100m","NHS-GW 2500m"},'location','best')
+lgd = legend(ax2,{"mean flow, 100m","mean flow, 2500m","mean flow & wave 100m","mean flow & wave 2500m"},'location','best');
+lgd.Position = [.4 0.1649    0.2362    0.1537];
+
 
 M2Period = 12.420602*3600; % M2 tidal period, s
 
@@ -122,11 +124,11 @@ text(ax1,(2*pi/M2Period+wvt.f)*86400/2/pi,textY,'f+M2','Color','k','HorizontalAl
 text(ax1,sqrt(wvt.N2(depthIndices(1)))*86400/2/pi,textY,'N(2500m)','Color','k','HorizontalAlignment','right','FontWeight','bold')
 
 xlabel(tl,'frequency (cycles per day)')
-ylabel(tl,'power (m^2/s)')
+ylabel(tl,'power (m^2 s^{-2}/cpd)')
 ax2.YTickLabels={};
 
 
-exportgraphics(fig,figureFolder + "/" + "moorings_total_velocity_" + resolution + ".png",Resolution=300)
+exportgraphics(fig,figureFolder + "/" + "moorings_total_velocity_" + wvt.Nx + ".png",Resolution=300)
 
 % fig1 = wvd1.plotMooringRotarySpectrum(shouldShowLegend=false,title="hydrostatic: geostrophic",shouldShowSpectralTitles=false);
 % fig9 = wvd9.plotMooringRotarySpectrum(shouldShowLegend=false,title="hydrostatic: geostrophic + waves",shouldShowSpectralTitles=false);
