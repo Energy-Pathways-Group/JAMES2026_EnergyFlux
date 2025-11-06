@@ -185,7 +185,7 @@ patch(ax,[lambdaDamp,flip(lambdaDamp)],[yl(1),yl(1),0,0],colorDamp,'FaceAlpha',p
 lgd1 = legend('location','southwest');
 ylabel(gca,{"potential enstrophy flux (" + wvd.z_flux_scale_units + ")"})
 xlabel(gca,xaxislabel);
-text(ax,max(xlim)*.95,max(ylim),'b)','FontSize',14,'HorizontalAlignment','left','VerticalAlignment','top')
+% text(ax,max(xlim)*.95,max(ylim),'b)','FontSize',14,'HorizontalAlignment','left','VerticalAlignment','top')
 
 
 exportgraphics(fig,figureFolder + "/" + "enstrophy_flux1D.png",Resolution=300)
