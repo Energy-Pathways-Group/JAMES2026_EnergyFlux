@@ -1,8 +1,7 @@
 % basedir = "/Users/Shared/CimRuns_June2025/output/";
-basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
+% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
 % basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
-% basedir = '/Users/cwortham/Documents/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns/output/';
-% basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_June2025_v2/output/';
+basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
 
 figureFolder = "./figures";
 if ~exist(figureFolder, 'dir')
@@ -26,7 +25,7 @@ shouldShowQuadraticFluxes = false;
 style = "pseudoradial";
 % style = "radial";
 
-fig = figure('Units', 'points', 'Position', [50 50 800 300]);
+fig = figure('Units', 'points', 'Position', [50 50 600 225]);
 set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
 tl = tiledlayout(1,1,TileSpacing="compact",Padding="compact");
