@@ -1,8 +1,7 @@
 % basedir = "/Users/Shared/CimRuns_June2025/output/";
-basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
+% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
 % basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
-% basedir = '/Users/cwortham/Documents/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns/output/';
-% basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_June2025_v2/output/';
+basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
 
 % runNumber=18; runName = "non-hydrostatic: geostrophic + waves";
 % wvd18 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
@@ -34,7 +33,7 @@ colorDictionary{"M2_tidal_forcing"} = C(5,:);
 
 %%
 
-fluxesOfInterest = {"geostrophic_mean_flow","quadratic_bottom_friction","adaptive_damping","inertial_forcing","M2_tidal_forcing"};
+% fluxesOfInterest = {"geostrophic_mean_flow","quadratic_bottom_friction","adaptive_damping","inertial_forcing","M2_tidal_forcing"};
 fluxesOfInterest = {"geostrophic_mean_flow","quadratic_bottom_friction"};
 
 % forcing_fluxes(length(fluxesOfInterest)) = struct("name","placeholder");
@@ -44,13 +43,13 @@ for i=1:length(fluxesOfInterest)
     forcing_fluxes(i).color=colorDictionary{fluxesOfInterest{i}};
     forcing_fluxes(i).flux = energy_fluxes([energy_fluxes.name] == fluxesOfInterest{i}).(reservoirName)/wvd.flux_scale;
     forcing_fluxes(i).relativeAmplitude = 1.0;
-    forcing_fluxes(i).alpha = 1.0;
+    forcing_fluxes(i).alpha = 0.6;%1.0;
     forcing_fluxes(i).fancyName = energy_fluxes([energy_fluxes.name] == fluxesOfInterest{i}).fancyName;
 end
 forcing_fluxes(i+1).flux = inertial_fluxes_g([inertial_fluxes_g.name] == "tx-wwg").flux/wvd.flux_scale;
-forcing_fluxes(i+1).color = 0.5*[1 1 1];
-forcing_fluxes(i+1).relativeAmplitude = 0.5;
-forcing_fluxes(i+1).alpha = 0.25;
+forcing_fluxes(i+1).color = 0.0*[1 1 1];
+forcing_fluxes(i+1).relativeAmplitude = 1;
+forcing_fluxes(i+1).alpha = 0.6;
 forcing_fluxes(i+1).fancyName = "wwg";
 
 % maxAmplitude = max(arrayfun( @(v) abs(sum(v.flux(:))), forcing_fluxes));
@@ -74,7 +73,8 @@ title("ggg")
 exportgraphics(fig,figureFolder + "/" + "energy_flux_quadratic_2D_flow_geostrophic.png",Resolution=300)
 %%
 
-fluxesOfInterest = {"adaptive_damping","inertial_forcing","M2_tidal_forcing","quadratic_bottom_friction"};
+% fluxesOfInterest = {"adaptive_damping","inertial_forcing","M2_tidal_forcing","quadratic_bottom_friction"};
+fluxesOfInterest = {"inertial_forcing","M2_tidal_forcing","quadratic_bottom_friction"};
 
 clear forcing_fluxes;
 reservoirName = "te_wave";
@@ -83,15 +83,15 @@ for i=1:length(fluxesOfInterest)
     forcing_fluxes(i).flux = energy_fluxes([energy_fluxes.name] == fluxesOfInterest{i}).(reservoirName)/wvd.flux_scale;
     forcing_fluxes(i).fancyName = energy_fluxes([energy_fluxes.name] == fluxesOfInterest{i}).fancyName;
     forcing_fluxes(i).relativeAmplitude = 1.0;
-    forcing_fluxes(i).alpha = 1.0;
+    forcing_fluxes(i).alpha = 0.6;%1.0;
 end
-forcing_fluxes(i).alpha = 0.25;
+forcing_fluxes(i).alpha = 0.6;
 
 % forcing_fluxes(i+1).flux = -inertial_fluxes(4).te_gmda/wvd.flux_scale;
 forcing_fluxes(i+1).flux = inertial_fluxes_w([inertial_fluxes_w.name] == "tx-wwg").flux/wvd.flux_scale;
-forcing_fluxes(i+1).color = 0.5*[1 1 1];
-forcing_fluxes(i+1).relativeAmplitude = 0.5;
-forcing_fluxes(i+1).alpha = 1.0;
+forcing_fluxes(i+1).color = 0.0*[1 1 1];
+forcing_fluxes(i+1).relativeAmplitude = 1;
+forcing_fluxes(i+1).alpha = 0.6;
 forcing_fluxes(i+1).fancyName = "wwg";
 
 maxAmplitude = max(arrayfun( @(v) max(abs(v.flux(:))), forcing_fluxes));
