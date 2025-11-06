@@ -1,6 +1,6 @@
 % basedir = "/Users/Shared/CimRuns_June2025/output/";
-basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
-% basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_June2025_v2/output/';
+% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
+basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
 
 wvd = WVDiagnostics(basedir + replace(getRunParameters(18),"256","512") + ".nc");
 wvt = wvd.wvt;
