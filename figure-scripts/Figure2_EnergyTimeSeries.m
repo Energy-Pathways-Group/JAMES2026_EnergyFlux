@@ -70,14 +70,14 @@ yLimits = [0 4.5];
 fill([x1 x2 x2 x1], [yLimits(1) yLimits(1) yLimits(2) yLimits(2)], ...
     [0.8 0.8 0.8], 'EdgeColor', 'none', 'FaceAlpha', 0.7); hold on;
 
-p1 = plot(t1/wvd1.tscale,Z1/wvd1.zscale,LineWidth=2,DisplayName='mean flow forcing'); hold on
-% p2 = plot(t9/wvd1.tscale,Z9/wvd1.zscale,LineWidth=2,DisplayName="mean flow & wave forcing, hydrostatic");
-p3 = plot(t18/wvd1.tscale,Z18/wvd1.zscale,LineWidth=2,DisplayName="mean flow & wave forcing");
+p1 = plot(t1/wvd1.tscale,Z1/wvd1.zscale,LineWidth=2,DisplayName='MF'); hold on
+% p2 = plot(t9/wvd1.tscale,Z9/wvd1.zscale,LineWidth=2,DisplayName="MFW, hydrostatic");
+p3 = plot(t18/wvd1.tscale,Z18/wvd1.zscale,LineWidth=2,DisplayName="MFW");
 
 set(gca,'ColorOrderIndex',1)
-plot(t1_2x/wvd1.tscale,Z1_2x/wvd1.zscale,LineWidth=2,DisplayName='mean flow forcing'), hold on
-% plot(t9_2x/wvd1.tscale,Z9_2x/wvd1.zscale,LineWidth=2,DisplayName="mean flow & wave forcing, hydrostatic")
-plot(t18_2x/wvd1.tscale,Z18_2x/wvd1.zscale,LineWidth=2,DisplayName="mean flow & wave forcing")
+plot(t1_2x/wvd1.tscale,Z1_2x/wvd1.zscale,LineWidth=2,DisplayName='MF'), hold on
+% plot(t9_2x/wvd1.tscale,Z9_2x/wvd1.zscale,LineWidth=2,DisplayName="MFW, hydrostatic")
+plot(t18_2x/wvd1.tscale,Z18_2x/wvd1.zscale,LineWidth=2,DisplayName="MFW")
 
 ylabel("potential enstrophy (" + wvd1.zscale_units + ")")
 ylim(yLimits)

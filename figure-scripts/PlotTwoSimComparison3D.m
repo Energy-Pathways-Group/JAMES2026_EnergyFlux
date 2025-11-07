@@ -78,14 +78,14 @@ makeVorticityXYZPlot(wvd1.wvt.zeta_z,iY1);
 xlabel('distance (km)')
 % ylabel('distance (km)')
 zlabel('depth (km)')
-title(ax, "mean flow forcing")
+title(ax, "MF")
 
 ax = nexttile(tl,2);
 makeVorticityXYZPlot(wvd18.wvt.zeta_z,iY2);
 xticklabels([])
 yticklabels([])
 zticklabels([])
-title(ax, "mean flow & wave forcing")
+title(ax, "MFW")
 if nRows==1
     cb = colorbar
     cb.Layout.Tile = 'south';

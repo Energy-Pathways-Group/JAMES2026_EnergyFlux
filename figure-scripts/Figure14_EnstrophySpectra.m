@@ -16,7 +16,7 @@ runNumber=18;
 wvd18 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
 
 wvdArray = {wvd1,wvd18};
-runNames = {"mean flow forcing","mean flow & wave forcing"};
+runNames = {"MF","MFW"};
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -65,7 +65,7 @@ gmf = wvt.forcingWithName("geostrophic-mean-flow");
 forcingIndex = gmf.A0_indices(2);
 Kh2 = wvt.K(forcingIndex).^2 + wvt.L(forcingIndex).^2;
 Kp2 = Kh2 + 1/wvt.Lr2(wvt.J(forcingIndex)+1);
-forcingPseudoWavelength = 2*pi/sqrt(Kp2)/1000
+forcingPseudoWavelength = 2*pi/sqrt(Kp2)/1000;
 
     % create radial wavelength vector
     radialWavelength = 2*pi./wvt.kRadial/1000;

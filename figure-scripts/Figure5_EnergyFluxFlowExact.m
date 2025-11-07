@@ -55,7 +55,7 @@ set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
 fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=2e-3,kmax=2e-3,forcingFlux=forcing_fluxes1,inertialFlux=flux_advective,addFrequencyContours=false,addKEPEContours=false);
 ax = gca;
-ax.Title.String = "energy flux: mean flow forcing";
+ax.Title.String = "energy flux, MF";
 exportgraphics(fig,figureFolder + "/" + "energy_flux_exact_2D_flow_run1.png",Resolution=300)
 
 %%
@@ -98,7 +98,7 @@ fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransi
 set(gca,'YTickLabel',[]);
 set(gca,'YLabel',[]);
 ax = gca;
-ax.Title.String = "energy flux: mean flow & wave forcing";
+ax.Title.String = "energy flux, MFW";
 exportgraphics(fig,figureFolder + "/" + "energy_flux_exact_2D_flow_run18.png",Resolution=300)
 
 

@@ -52,7 +52,7 @@ set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
 fig = wvd.plotPoissonFlowOverContours(nLevels=20,figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=quiverScale,jmax=2e-3,kmax=2e-3,forcingFlux=forcing_fluxes1,inertialFlux=flux_advective,addFrequencyContours=false,addKEPEContours=false);
 ax = gca;
-ax.Title.String = "potential enstrophy flux: mean flow forcing";
+ax.Title.String = "potential enstrophy flux, MF";
 exportgraphics(fig,figureFolder + "/" + "enstrophy_flux_exact_2D_flow_run1.png",Resolution=300)
 
 
@@ -96,5 +96,5 @@ fig = wvd.plotPoissonFlowOverContours(nLevels=20,figureHandle=fig,vectorDensityL
 set(gca,'YTickLabel',[]);
 set(gca,'YLabel',[]);
 ax = gca;
-ax.Title.String = "potential enstrophy flux: mean flow & wave forcing";
+ax.Title.String = "potential enstrophy flux, MFW";
 exportgraphics(fig,figureFolder + "/" + "enstrophy_flux_exact_2D_flow_run18.png",Resolution=300)

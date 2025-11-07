@@ -36,7 +36,7 @@ col{"sink"} = [245 194 193]/255;
 order = ["geostrophic", "wave", "damped_geostrophic", "damped_wave"];
 
 
-[~, boxDiagram] = wvd1.plotSourcesSinksForReservoirGroup(customForcing=customForcing,customNames=custom_names,customColors=col,customReservoirOrder=order,shouldShowUnits=true,timeIndices=timeIndices,title="mean flow forcing",visible="off");
+[~, boxDiagram] = wvd1.plotSourcesSinksForReservoirGroup(customForcing=customForcing,customNames=custom_names,customColors=col,customReservoirOrder=order,shouldShowUnits=true,timeIndices=timeIndices,title="MF: mean flow forcing",visible="off");
 sourcesBoxes = boxDiagram.rows{1};
 sourcesBoxes(1).Position(1) = 0;
 
@@ -57,7 +57,7 @@ boxDiagram.layoutArrows();
 fig1 = boxDiagram.draw();
 
 %%
-[~, boxDiagram] = wvd9.plotSourcesSinksForReservoirGroup(customForcing=customForcing,customNames=custom_names,customColors=col,customReservoirOrder=order,shouldShowUnits=true,timeIndices=timeIndices,title="mean flow & wave forcing, hydrostatic",visible="off");
+[~, boxDiagram] = wvd9.plotSourcesSinksForReservoirGroup(customForcing=customForcing,customNames=custom_names,customColors=col,customReservoirOrder=order,shouldShowUnits=true,timeIndices=timeIndices,title="MFW: mean flow & wave forcing, hydrostatic",visible="off");
 dampedBoxes = boxDiagram.rows{3};
 dampedBoxes(1).Size = [3.5 2.0];
 dampedBoxes(2).Size = [3.5 2.0];
@@ -75,7 +75,7 @@ boxDiagram.arrows(4).LabelPosition = [8 -1.90];
 fig9 = boxDiagram.draw();
 
 %%
-[~, boxDiagram] = wvd18.plotSourcesSinksForReservoirGroup(customForcing=customForcing,customNames=custom_names,customColors=col,customReservoirOrder=order,shouldShowUnits=true,timeIndices=timeIndices,title="mean flow & wave forcing",visible="off");
+[~, boxDiagram] = wvd18.plotSourcesSinksForReservoirGroup(customForcing=customForcing,customNames=custom_names,customColors=col,customReservoirOrder=order,shouldShowUnits=true,timeIndices=timeIndices,title="MFW: mean flow & wave forcing",visible="off");
 dampedBoxes = boxDiagram.rows{3};
 dampedBoxes(1).Size = [3.5 2.0];
 dampedBoxes(2).Size = [3.5 2.0];

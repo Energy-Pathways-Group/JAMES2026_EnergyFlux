@@ -201,7 +201,7 @@ end
 nexttile(1)
 
 % legend([p(1), p(2) p(3) p(4) p(5) p(6)],'HS-G: geostrophic','HS-G: wave','HS-GW: geostrophic','HS-GW: wave','NHS-GW: geostrophic','NHS-GW: wave')
-legend([p(1), p(2) p(3) p(4)],'mean flow: geostrophic','mean flow: wave','mean flow & wave: geostrophic','mean flow & wave: wave')
+legend([p(1), p(2) p(3) p(4)],'MF: geostrophic','MF: wave','MFW: geostrophic','MFW: wave')
 
 if shouldShowPseudoRadialPlot
     exportgraphics(fig,figureFolder + "/" + "energy_spectrum_3panel.png",Resolution=300)

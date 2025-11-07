@@ -91,8 +91,11 @@ for i=1:length(wvdArray)
 end
 
 % legend(ax2,{"HS-G 100m","HS-G 2500m","HS-GW 100m","HS-GW 2500m","NHS-GW 100m","NHS-GW 2500m"},'location','best')
-lgd = legend(ax2,{"mean flow, 100m","mean flow, 2500m","mean flow & wave 100m","mean flow & wave 2500m"},'location','best');
-lgd.Position = [.4 0.1649    0.2362    0.1537];
+lgd = legend(ax2,{"MF, 100m","MF, 2500m","MFW 100m","MFW 2500m"},'location','best');
+% lgdPos = lgd.Position;
+% lgd.Position = [.4 0.1649    0.2362    0.1537];
+% lgd.Position = [.4 lgdPos(2) lgdPos(3) lgdPos(4)];
+
 
 
 M2Period = 12.420602*3600; % M2 tidal period, s
