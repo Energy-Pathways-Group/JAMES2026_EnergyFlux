@@ -38,6 +38,13 @@ else
     tl = tiledlayout(2,2,TileSpacing="tight");
 end
 
+% colors
+C = orderedcolors("gem"); 
+colorDictionary = dictionary("APV",{C(4,:)});
+colorDictionary{"QGPV"} = C(3,:);
+colorDictionary{"error"} = [0 0 0];
+colorDictionary{"slope"} = [0 0 0];
+
 n = 1;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -93,11 +100,11 @@ forcingPseudoWavelength = 2*pi/sqrt(Kp2)/1000;
 
     % plot horizontal wavenumber spectrum
     axK = nexttile(n); n = n+1;
-    p(1) = plot(radialWavelength,units_scale*TZ_APV_kR,LineWidth=1.5); hold on
-    p(2) = plot(radialWavelength,units_scale*TZ_A0_kR,LineWidth=1.5);
-    p(3) = plot(radialWavelength,units_scale*TZ_Error_kR,Color=0*[1 1 1],LineWidth=1.5);
-    p(4) = plot(radialWavelength,units_scale*TZ_ErrorNoRV_kR ,Color=0*[1 1 1],LineWidth=1.5,LineStyle=":");
-    p(5) = plot(radialWavelength,units_scale*TZ_ErrorNoETA_kR,Color=0*[1 1 1],LineWidth=1.5,LineStyle="--");
+    p(1) = plot(radialWavelength,units_scale*TZ_APV_kR,Color=colorDictionary{'APV'},LineWidth=1.5); hold on
+    p(2) = plot(radialWavelength,units_scale*TZ_A0_kR,Color=colorDictionary{'QGPV'},LineWidth=1.5);
+    p(3) = plot(radialWavelength,units_scale*TZ_Error_kR,Color=colorDictionary{'error'},LineWidth=1.5);
+    p(4) = plot(radialWavelength,units_scale*TZ_ErrorNoRV_kR,Color=colorDictionary{'error'},LineWidth=1.5,LineStyle=":");
+    p(5) = plot(radialWavelength,units_scale*TZ_ErrorNoETA_kR,Color=colorDictionary{'error'},LineWidth=1.5,LineStyle="--");
     set(gca,'XDir','reverse')
     xscale('log'); yscale('log')
     axis tight
@@ -108,7 +115,7 @@ forcingPseudoWavelength = 2*pi/sqrt(Kp2)/1000;
 
     rw = [3e2 1e1];
     slope = (3.3e-12)*rw.^(1.5); % 3.5e-10 @ 1e2
-    plot(rw,units_scale*slope,LineStyle="--",Color=0*[1 1 1])
+    plot(rw,units_scale*slope,LineStyle="--",Color=colorDictionary{'slope'})
     text(30,units_scale*10e-10,"\lambda^{1.5}")
 
     % rw = [40 150];
@@ -135,11 +142,11 @@ forcingPseudoWavelength = 2*pi/sqrt(Kp2)/1000;
     end
 
     axJ = nexttile(n); n = n+1;
-    plot(jAxis,units_scale*TZ_APV_j,LineWidth=1.5); hold on
-    plot(jAxis,units_scale*TZ_A0_j,LineWidth=1.5);
-    plot(jAxis,units_scale*TZ_Error_j,Color=0*[1 1 1],LineWidth=1.5);
-    plot(jAxis,units_scale*TZ_ErrorNoRV_j ,Color=0*[1 1 1],LineWidth=1.5,LineStyle=":");
-    plot(jAxis,units_scale*TZ_ErrorNoETA_j,Color=0*[1 1 1],LineWidth=1.5,LineStyle="--");
+    plot(jAxis,units_scale*TZ_APV_j,Color=colorDictionary{'APV'},LineWidth=1.5); hold on
+    plot(jAxis,units_scale*TZ_A0_j,Color=colorDictionary{'QGPV'},LineWidth=1.5);
+    plot(jAxis,units_scale*TZ_Error_j,Color=colorDictionary{'error'},LineWidth=1.5);
+    plot(jAxis,units_scale*TZ_ErrorNoRV_j,Color=colorDictionary{'error'},LineWidth=1.5,LineStyle=":");
+    plot(jAxis,units_scale*TZ_ErrorNoETA_j,Color=colorDictionary{'error'},LineWidth=1.5,LineStyle="--");
     yscale('log'); xscale('log');
     set(gca,'XDir','reverse')
     ylim(units_scale*10.^options.clim);
@@ -151,12 +158,12 @@ forcingPseudoWavelength = 2*pi/sqrt(Kp2)/1000;
 
     rw = [30 150];
     slope = (1.5e-12)*rw.^(2); % 3.3e-8 @ 150
-    plot(rw,units_scale*slope,LineStyle="--",Color=0*[1 1 1])
+    plot(rw,units_scale*slope,LineStyle="--",Color=colorDictionary{'slope'})
     text(60,units_scale*10e-9,"\lambda^{2}")
 
     rw = [40 6];
     slope = (4.0e-11)*rw.^(1); % 1e-10 @  7
-    plot(rw,units_scale*slope,LineStyle="--",Color=0*[1 1 1])
+    plot(rw,units_scale*slope,LineStyle="--",Color=colorDictionary{'slope'})
     text(10,units_scale*60e-11,"\lambda^{1}")
 
     % ja = [5 30];
@@ -173,11 +180,11 @@ forcingPseudoWavelength = 2*pi/sqrt(Kp2)/1000;
 
     if shouldShowPseudoRadialPlot
         axKP = nexttile(n); n = n+1;
-        plot(pseudoRadialWavelength,units_scale*TZ_APV_kPseudo,LineWidth=1.5), hold on
-        plot(pseudoRadialWavelength,units_scale*TZ_A0_kPseudo,LineWidth=1.5),
-        plot(pseudoRadialWavelength,units_scale*TZ_Error_kPseudo,Color=0*[1 1 1],LineWidth=1.5)
-        plot(pseudoRadialWavelength,units_scale*TZ_ErrorNoRV_kPseudo ,Color=0*[1 1 1],LineWidth=1.5,LineStyle=":");
-        plot(pseudoRadialWavelength,units_scale*TZ_ErrorNoETA_kPseudo,Color=0*[1 1 1],LineWidth=1.5,LineStyle="--");
+        plot(pseudoRadialWavelength,units_scale*TZ_APV_kPseudo,Color=colorDictionary{'APV'},LineWidth=1.5), hold on
+        plot(pseudoRadialWavelength,units_scale*TZ_A0_kPseudo,Color=colorDictionary{'QGPV'},LineWidth=1.5),
+        plot(pseudoRadialWavelength,units_scale*TZ_Error_kPseudo,Color=colorDictionary{'error'},LineWidth=1.5)
+        plot(pseudoRadialWavelength,units_scale*TZ_ErrorNoRV_kPseudo,Color=colorDictionary{'error'},LineWidth=1.5,LineStyle=":");
+        plot(pseudoRadialWavelength,units_scale*TZ_ErrorNoETA_kPseudo,Color=colorDictionary{'error'},LineWidth=1.5,LineStyle="--");
         set(gca,'XDir','reverse')
         xscale('log'); yscale('log')
         axis tight
@@ -194,12 +201,12 @@ forcingPseudoWavelength = 2*pi/sqrt(Kp2)/1000;
 
         rw = [30 150];
         slope = (1.5e-12)*rw.^(2); % 3.3e-8 @ 150
-        plot(rw,units_scale*slope,LineStyle="--",Color=0*[1 1 1])
+        plot(rw,units_scale*slope,LineStyle="--",Color=colorDictionary{'slope'})
         text(60,units_scale*10e-9,"\lambda^{2}")
 
         rw = [40 6];
         slope = (4.0e-11)*rw.^(1); % 1e-10 @  7
-        plot(rw,units_scale*slope,LineStyle="--",Color=0*[1 1 1])
+        plot(rw,units_scale*slope,LineStyle="--",Color=colorDictionary{'slope'})
         text(10,units_scale*60e-11,"\lambda^{1}")
     end
 
