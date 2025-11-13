@@ -4,13 +4,15 @@
 basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
 
 
-wvd1 = WVDiagnostics(basedir + replace(getRunParameters(1),"256","512") + ".nc");
+% wvd1 = WVDiagnostics(basedir + replace(getRunParameters(1),"256","512") + ".nc");
+wvd22 = WVDiagnostics(basedir + replace(getRunParameters(22),"256","512") + ".nc");
 % wvd9 = WVDiagnostics(basedir + replace(getRunParameters(9),"256","512") + ".nc");
 wvd18 = WVDiagnostics(basedir + replace(getRunParameters(18),"256","512") + ".nc");
 
 %%
 
-wvdArray{1} = wvd1;
+% wvdArray{1} = wvd1;
+wvdArray{1} = wvd22;
 wvdArray{2} = wvd18;
 % wvdArray{3} = wvd9;
 
@@ -33,7 +35,7 @@ col.sinks   = [245 194 193]/255;
 
 depths = [-2500 -100];
 depthIndices = zeros(size(depths));
-z = wvd1.wvfile.readVariables('mooring/mooring_z');
+z = wvd22.wvfile.readVariables('mooring/mooring_z');
 for iDepth=1:length(depths)
     [~,depthIndices(iDepth)] = min(abs(z - depths(iDepth)));
 end
@@ -90,6 +92,11 @@ for i=1:length(wvdArray)
 
 end
 
+% tweak ylim
+yl = ylim(ax1);
+ylim(ax1,[yl(1) 1.5*yl(2)])
+ylim(ax2,[yl(1) 1.5*yl(2)])
+
 % legend(ax2,{"HS-G 100m","HS-G 2500m","HS-GW 100m","HS-GW 2500m","NHS-GW 100m","NHS-GW 2500m"},'location','best')
 lgd = legend(ax2,{"MF, 100m","MF, 2500m","MFW 100m","MFW 2500m"},'location','best');
 % lgdPos = lgd.Position;
@@ -100,7 +107,7 @@ lgd = legend(ax2,{"MF, 100m","MF, 2500m","MFW 100m","MFW 2500m"},'location','bes
 
 M2Period = 12.420602*3600; % M2 tidal period, s
 
-wvt = wvd1.wvt;
+wvt = wvd22.wvt;
 
 % reference frequency lines
 plt4 = plot(ax1,[wvt.f,wvt.f]*86400/2/pi,ylim,'k--','DisplayName','f','HandleVisibility','off');

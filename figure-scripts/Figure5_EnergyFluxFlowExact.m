@@ -5,8 +5,9 @@
 basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
 
 
-wvd1 = WVDiagnostics(basedir + replace(getRunParameters(1),"256","512") + ".nc");
-wvd9 = WVDiagnostics(basedir + replace(getRunParameters(9),"256","512") + ".nc");
+% wvd1 = WVDiagnostics(basedir + replace(getRunParameters(1),"256","512") + ".nc");
+wvd22 = WVDiagnostics(basedir + replace(getRunParameters(22),"256","512") + ".nc");
+% wvd9 = WVDiagnostics(basedir + replace(getRunParameters(9),"256","512") + ".nc");
 wvd18 = WVDiagnostics(basedir + replace(getRunParameters(18),"256","512") + ".nc");
 
 figureFolder = "./figures";
@@ -19,7 +20,7 @@ end
 
 %%
 
-wvd = wvd1;
+wvd = wvd22;
 
 energy_fluxes = wvd.exactEnergyFluxesTemporalAverage(timeIndices=51:251);
 
@@ -56,7 +57,7 @@ set(gcf, 'Color', 'w');
 fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=2e-3,kmax=2e-3,forcingFlux=forcing_fluxes1,inertialFlux=flux_advective,addFrequencyContours=false,addKEPEContours=false);
 ax = gca;
 ax.Title.String = "energy flux, MF";
-exportgraphics(fig,figureFolder + "/" + "energy_flux_exact_2D_flow_run1.png",Resolution=300)
+exportgraphics(fig,figureFolder + "/" + "energy_flux_exact_2D_flow_run22.png",Resolution=300)
 
 %%
 

@@ -3,6 +3,7 @@
 basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
 
 wvd1 = WVDiagnostics(basedir + replace(getRunParameters(1),"256","512") + ".nc");
+wvd22 = WVDiagnostics(basedir + replace(getRunParameters(22),"256","512") + ".nc");
 wvd9 = WVDiagnostics(basedir + replace(getRunParameters(9),"256","512") + ".nc");
 wvd18 = WVDiagnostics(basedir + replace(getRunParameters(18),"256","512") + ".nc");
 
@@ -35,8 +36,8 @@ col{"sink"} = [245 194 193]/255;
 
 order = ["geostrophic", "wave", "damped_geostrophic", "damped_wave"];
 
-
-[~, boxDiagram] = wvd1.plotSourcesSinksForReservoirGroup(customForcing=customForcing,customNames=custom_names,customColors=col,customReservoirOrder=order,shouldShowUnits=true,timeIndices=timeIndices,title="MF: mean flow forcing",visible="off");
+%% run 1
+[~, boxDiagram] = wvd1.plotSourcesSinksForReservoirGroup(customForcing=customForcing,customNames=custom_names,customColors=col,customReservoirOrder=order,shouldShowUnits=true,timeIndices=timeIndices,title="MF: mean flow forcing, hydrostatic",visible="off");
 sourcesBoxes = boxDiagram.rows{1};
 sourcesBoxes(1).Position(1) = 0;
 
@@ -56,7 +57,28 @@ sinksBoxes(2).Position = sinksBoxes(2).Position + [1.6 0];
 boxDiagram.layoutArrows();
 fig1 = boxDiagram.draw();
 
-%%
+%% run 22
+[~, boxDiagram] = wvd22.plotSourcesSinksForReservoirGroup(customForcing=customForcing,customNames=custom_names,customColors=col,customReservoirOrder=order,shouldShowUnits=true,timeIndices=timeIndices,title="MF: mean flow forcing",visible="off");
+sourcesBoxes = boxDiagram.rows{1};
+sourcesBoxes(1).Position(1) = 0;
+
+inertialBoxes = boxDiagram.rows{2};
+inertialBoxes(2).Position(1) = 7.0;
+
+dampedBoxes = boxDiagram.rows{3};
+dampedBoxes(1).Size = [3.5 2.0];
+dampedBoxes(2).Size = [3.5 2.0];
+dampedBoxes(1).Position = dampedBoxes(1).Position + [4.0 0];
+dampedBoxes(2).Position = dampedBoxes(2).Position + [2.5 0];
+
+sinksBoxes = boxDiagram.rows{4};
+sinksBoxes(1).Position(1) = 0;
+sinksBoxes(2).Position = sinksBoxes(2).Position + [1.6 0];
+
+boxDiagram.layoutArrows();
+fig22 = boxDiagram.draw();
+
+%% run 9
 [~, boxDiagram] = wvd9.plotSourcesSinksForReservoirGroup(customForcing=customForcing,customNames=custom_names,customColors=col,customReservoirOrder=order,shouldShowUnits=true,timeIndices=timeIndices,title="MFW: mean flow & wave forcing, hydrostatic",visible="off");
 dampedBoxes = boxDiagram.rows{3};
 dampedBoxes(1).Size = [3.5 2.0];
@@ -74,7 +96,7 @@ boxDiagram.arrows(4).LabelPosition = [8 -1.90];
 
 fig9 = boxDiagram.draw();
 
-%%
+%% run 18
 [~, boxDiagram] = wvd18.plotSourcesSinksForReservoirGroup(customForcing=customForcing,customNames=custom_names,customColors=col,customReservoirOrder=order,shouldShowUnits=true,timeIndices=timeIndices,title="MFW: mean flow & wave forcing",visible="off");
 dampedBoxes = boxDiagram.rows{3};
 dampedBoxes(1).Size = [3.5 2.0];
@@ -95,5 +117,6 @@ fig18 = boxDiagram.draw();
 %%
 
 exportgraphics(fig1,figureFolder + "/" + "sources_sinks_run1.png",Resolution=300)
+exportgraphics(fig22,figureFolder + "/" + "sources_sinks_run22.png",Resolution=300)
 exportgraphics(fig9,figureFolder + "/" + "sources_sinks_run9.png",Resolution=300)
 exportgraphics(fig18,figureFolder + "/" + "sources_sinks_run18.png",Resolution=300)

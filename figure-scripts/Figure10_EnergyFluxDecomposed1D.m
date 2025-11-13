@@ -1,7 +1,7 @@
 % basedir = "/Users/Shared/CimRuns_June2025/output/";
 % basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
-% basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
-
+% basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
+basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
 
 % runNumber=1; runName = "hydrostatic: geostrophic";
 % runNumber=9; runName = "hydrostatic: geostrophic + waves";

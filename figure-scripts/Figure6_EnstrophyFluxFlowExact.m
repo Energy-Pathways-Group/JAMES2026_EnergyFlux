@@ -6,6 +6,9 @@ basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-mun
 runNumber=1; runName = "hydrostatic: geostrophic";
 wvd1 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
 
+runNumber=22; runName = "non-hydrostatic: geostrophic";
+wvd22 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
+
 runNumber=18; runName = "non-hydrostatic: geostrophic + waves";
 wvd18 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
 
@@ -16,7 +19,7 @@ end
 
 %%
 
-wvd = wvd1;
+wvd = wvd22;
 enstrophy_fluxes = wvd.exactEnstrophyFluxesTemporalAverage(timeIndices=51:251);
 quiverScale = 1;
 
@@ -53,7 +56,7 @@ set(gcf, 'Color', 'w');
 fig = wvd.plotPoissonFlowOverContours(nLevels=20,figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=quiverScale,jmax=2e-3,kmax=2e-3,forcingFlux=forcing_fluxes1,inertialFlux=flux_advective,addFrequencyContours=false,addKEPEContours=false);
 ax = gca;
 ax.Title.String = "potential enstrophy flux, MF";
-exportgraphics(fig,figureFolder + "/" + "enstrophy_flux_exact_2D_flow_run1.png",Resolution=300)
+exportgraphics(fig,figureFolder + "/" + "enstrophy_flux_exact_2D_flow_run22.png",Resolution=300)
 
 
 %%

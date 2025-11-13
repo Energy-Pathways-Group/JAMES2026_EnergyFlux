@@ -1,7 +1,8 @@
 % basedir = "/Users/Shared/CimRuns_June2025/output/";
 basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
 
-wvd1 = WVDiagnostics(basedir + replace(getRunParameters(1),"256","512") + ".nc");
+% wvd1 = WVDiagnostics(basedir + replace(getRunParameters(1),"256","512") + ".nc");
+wvd22 = WVDiagnostics(basedir + replace(getRunParameters(22),"256","512") + ".nc");
 % wvd9 = WVDiagnostics(basedir + replace(getRunParameters(9),"256","512") + ".nc");
 wvd18 = WVDiagnostics(basedir + replace(getRunParameters(18),"256","512") + ".nc");
 
@@ -12,6 +13,7 @@ end
 
 %%
 % fig = PlotThreeSimComparison3D(wvd1,wvd9,wvd18,yForXZSlice1=430e3,yForXZSlice2=120e3,yForXZSlice3=110e3);
-fig = PlotTwoSimComparison3D(wvd1,wvd18,yForXZSlice1=430e3,yForXZSlice2=110e3);
+% fig = PlotTwoSimComparison3D(wvd1,wvd18,yForXZSlice1=430e3,yForXZSlice2=110e3);
+fig = PlotTwoSimComparison3D(wvd22,wvd18,yForXZSlice1=40e3,yForXZSlice2=110e3);
 
 exportgraphics(fig,figureFolder + "/" + "two_sim_comparison_3D_H.png",Resolution=300)

@@ -8,8 +8,11 @@ if ~exist(figureFolder, 'dir')
        mkdir(figureFolder)
 end
 
-runNumber=1; runName = "hydrostatic: geostrophic";
-wvd1 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
+% runNumber=1; runName = "hydrostatic: geostrophic";
+% wvd1 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
+
+runNumber=22; runName = "non-hydrostatic: geostrophic";
+wvd22 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
 
 % runNumber=9; runName = "hydrostatic: geostrophic + waves";
 % wvd9 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
@@ -18,7 +21,7 @@ runNumber=18; runName = "non-hydrostatic: geostrophic + waves";
 wvd18 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
 
 % wvdArray = {wvd1,wvd9,wvd18};
-wvdArray = {wvd1,wvd18};
+wvdArray = {wvd22,wvd18};
 
 %%
 % 

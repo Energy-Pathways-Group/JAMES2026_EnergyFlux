@@ -9,13 +9,16 @@ if ~exist(figureFolder, 'dir')
        mkdir(figureFolder)
 end
 
-runNumber=1;
-wvd1 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
+% runNumber=1;
+% wvd1 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
+
+runNumber=22;
+wvd22 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
 
 runNumber=18;
 wvd18 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
 
-wvdArray = {wvd1,wvd18};
+wvdArray = {wvd22,wvd18};
 runNames = {"MF","MFW"};
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
