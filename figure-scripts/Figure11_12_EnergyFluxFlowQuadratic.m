@@ -68,7 +68,7 @@ set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
 clear ggg
 ggg.flux = inertial_fluxes_g([inertial_fluxes_g.name] == "ggg").flux/wvd.flux_scale;
-fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=2e-3,kmax=2e-3,forcingFlux=forcing_fluxes,inertialFlux=ggg,addKEPEContours=true);
+fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=50,kmax=2e-3,forcingFlux=forcing_fluxes,inertialFlux=ggg,addKEPEContours=true);
 title("ggg")
 exportgraphics(fig,figureFolder + "/" + "energy_flux_quadratic_2D_flow_geostrophic.png",Resolution=300)
 %%
@@ -104,7 +104,7 @@ fig = figure('Units', 'points', 'Position', [50 50 400 400]);
 set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
 wwg.flux = inertial_fluxes_w([inertial_fluxes_w.name] == "wwg").flux/wvd.flux_scale;
-fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=2e-3,kmax=2e-3,forcingFlux=forcing_fluxes,inertialFlux=wwg,addFrequencyContours=true);
+fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=50,kmax=2e-3,forcingFlux=forcing_fluxes,inertialFlux=wwg,addFrequencyContours=true);
 title("wwg")
 exportgraphics(fig,figureFolder + "/" + "energy_flux_quadratic_2D_flow_wave_wwg.png",Resolution=300)
 
@@ -114,6 +114,6 @@ fig = figure('Units', 'points', 'Position', [50 50 400 400]);
 set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
 www.flux = inertial_fluxes_w([inertial_fluxes_w.name] == "www").flux/wvd.flux_scale;
-fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=2e-3,kmax=2e-3,forcingFlux=forcing_fluxes,inertialFlux=www,addFrequencyContours=true);
+fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=50,kmax=2e-3,forcingFlux=forcing_fluxes,inertialFlux=www,addFrequencyContours=true);
 title("www")
 exportgraphics(fig,figureFolder + "/" + "energy_flux_quadratic_2D_flow_wave_www.png",Resolution=300)

@@ -54,8 +54,7 @@ end
 fig = figure('Units', 'points', 'Position', [50 50 400 400]);
 set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
-fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=2e-3,kmax=2e-3,forcingFlux=forcing_fluxes1,inertialFlux=flux_advective,addFrequencyContours=false,addKEPEContours=false);
-% fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=50,kmax=2e-3,forcingFlux=forcing_fluxes1,inertialFlux=flux_advective,addFrequencyContours=false,addKEPEContours=false);
+fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=50,kmax=2e-3,forcingFlux=forcing_fluxes1,inertialFlux=flux_advective,addFrequencyContours=false,addKEPEContours=false);
 ax = gca;
 ax.Title.String = "energy flux, MF";
 exportgraphics(fig,figureFolder + "/" + "energy_flux_exact_2D_flow_run22.png",Resolution=300)
@@ -96,8 +95,7 @@ end
 fig = figure('Units', 'points', 'Position', [50 50 400 400]);
 set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
-fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=2e-3,kmax=2e-3,forcingFlux=forcing_fluxes18,inertialFlux=flux_advective,addFrequencyContours=false,addKEPEContours=false);
-% fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=50,kmax=2e-3,forcingFlux=forcing_fluxes18,inertialFlux=flux_advective,addFrequencyContours=false,addKEPEContours=false);
+fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=50,kmax=2e-3,forcingFlux=forcing_fluxes18,inertialFlux=flux_advective,addFrequencyContours=false,addKEPEContours=false);
 set(gca,'YTickLabel',[]);
 set(gca,'YLabel',[]);
 ax = gca;
