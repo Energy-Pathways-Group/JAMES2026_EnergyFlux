@@ -104,6 +104,7 @@ fig = figure('Units', 'points', 'Position', [50 50 400 400]);
 set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
 wwg.flux = inertial_fluxes_w([inertial_fluxes_w.name] == "wwg").flux/wvd.flux_scale;
+wwg.flux(isnan(wwg.flux)) = 0; % not sure why there are NaNs in this wwg...
 fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=50,kmax=2e-3,forcingFlux=forcing_fluxes,inertialFlux=wwg,addFrequencyContours=true);
 title("wwg")
 exportgraphics(fig,figureFolder + "/" + "energy_flux_quadratic_2D_flow_wave_wwg.png",Resolution=300)
