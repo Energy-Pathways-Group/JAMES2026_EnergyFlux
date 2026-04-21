@@ -1,8 +1,9 @@
 % basedir = "/Users/Shared/CimRuns_June2025/output/";
-basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
+% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
 % basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
 % basedir = '/Users/cwortham/Documents/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns/output/';
 % basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_June2025_v2/output/';
+basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
 
 figureFolder = "./figures";
 if ~exist(figureFolder, 'dir')

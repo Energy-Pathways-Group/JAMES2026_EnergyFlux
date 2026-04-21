@@ -80,13 +80,13 @@ fill([x1 x2 x2 x1], [yLimits(1) yLimits(1) yLimits(2) yLimits(2)], ...
 % p1 = plot(t1/wvd1.tscale,Z1/wvd1.zscale,LineWidth=2,DisplayName='MF'); hold on
 p1 = plot(t22/wvd22.tscale,Z22/wvd22.zscale,LineWidth=2,DisplayName='MF'); hold on
 % p2 = plot(t9/wvd1.tscale,Z9/wvd1.zscale,LineWidth=2,DisplayName="MFW, hydrostatic");
-p3 = plot(t18/wvd1.tscale,Z18/wvd1.zscale,LineWidth=2,DisplayName="MFW");
+p3 = plot(t18/wvd18.tscale,Z18/wvd18.zscale,LineWidth=2,DisplayName="MFW");
 
 set(gca,'ColorOrderIndex',1)
 % plot(t1_2x/wvd1.tscale,Z1_2x/wvd1.zscale,LineWidth=2,DisplayName='MF'), hold on
 plot(t22_2x/wvd22.tscale,Z22_2x/wvd22.zscale,LineWidth=2,DisplayName='MF'), hold on
 % plot(t9_2x/wvd1.tscale,Z9_2x/wvd1.zscale,LineWidth=2,DisplayName="MFW, hydrostatic")
-plot(t18_2x/wvd1.tscale,Z18_2x/wvd1.zscale,LineWidth=2,DisplayName="MFW")
+plot(t18_2x/wvd18.tscale,Z18_2x/wvd18.zscale,LineWidth=2,DisplayName="MFW")
 
 ylabel("potential enstrophy (" + wvd22.zscale_units + ")")
 ylim(yLimits)

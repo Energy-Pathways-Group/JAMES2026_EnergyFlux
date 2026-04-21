@@ -23,6 +23,13 @@ wvd = wvd22;
 enstrophy_fluxes = wvd.exactEnstrophyFluxesTemporalAverage(timeIndices=51:251);
 quiverScale = 1;
 
+% edit fancyName
+enstrophy_fluxes([enstrophy_fluxes.fancyName]=="geostrophic-mean-flow").fancyName = "mean flow forcing";
+% enstrophy_fluxes([enstrophy_fluxes.fancyName]=="M2-tidal-forcing").fancyName = "M2 tidal forcing";
+% enstrophy_fluxes([enstrophy_fluxes.fancyName]=="inertial-forcing").fancyName = "near-inertial forcing";
+enstrophy_fluxes([enstrophy_fluxes.fancyName]=="adaptive damping").fancyName = "damping";
+enstrophy_fluxes([enstrophy_fluxes.fancyName]=="quadratic bottom friction").fancyName = "bottom friction";
+
 C = orderedcolors("gem"); 
 colorDictionary = dictionary("geostrophic_mean_flow",{C(3,:)});
 colorDictionary{"quadratic_bottom_friction"} = C(1,:);
@@ -55,7 +62,7 @@ set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
 fig = wvd.plotPoissonFlowOverContours(nLevels=20,figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=quiverScale,jmax=50,kmax=2e-3,forcingFlux=forcing_fluxes1,inertialFlux=flux_advective,addFrequencyContours=false,addKEPEContours=false);
 ax = gca;
-ax.Title.String = "potential enstrophy flux, MF";
+ax.Title.String = "potential enstrophy flux, MF: mean flow forcing";
 exportgraphics(fig,figureFolder + "/" + "enstrophy_flux_exact_2D_flow_run22.png",Resolution=300)
 
 
@@ -64,6 +71,13 @@ exportgraphics(fig,figureFolder + "/" + "enstrophy_flux_exact_2D_flow_run22.png"
 wvd = wvd18;
 enstrophy_fluxes = wvd.exactEnstrophyFluxesTemporalAverage(timeIndices=51:251);
 quiverScale = 1;
+
+% edit fancyName
+enstrophy_fluxes([enstrophy_fluxes.fancyName]=="geostrophic-mean-flow").fancyName = "mean flow forcing";
+enstrophy_fluxes([enstrophy_fluxes.fancyName]=="M2-tidal-forcing").fancyName = "M_2 tidal forcing";
+enstrophy_fluxes([enstrophy_fluxes.fancyName]=="inertial-forcing").fancyName = "near-inertial forcing";
+enstrophy_fluxes([enstrophy_fluxes.fancyName]=="adaptive damping").fancyName = "damping";
+enstrophy_fluxes([enstrophy_fluxes.fancyName]=="quadratic bottom friction").fancyName = "bottom friction";
 
 C = orderedcolors("gem"); 
 colorDictionary = dictionary("geostrophic_mean_flow",{C(3,:)});
@@ -99,5 +113,5 @@ fig = wvd.plotPoissonFlowOverContours(nLevels=20,figureHandle=fig,vectorDensityL
 set(gca,'YTickLabel',[]);
 set(gca,'YLabel',[]);
 ax = gca;
-ax.Title.String = "potential enstrophy flux, MFW";
+ax.Title.String = "potential enstrophy flux, MFW: mean flow & wave forcing";
 exportgraphics(fig,figureFolder + "/" + "enstrophy_flux_exact_2D_flow_run18.png",Resolution=300)

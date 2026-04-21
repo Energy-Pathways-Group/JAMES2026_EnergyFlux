@@ -47,7 +47,7 @@ for i=1:length(fluxesOfInterest)
     forcing_fluxes(i).name = fluxesOfInterest{i};
     forcing_fluxes(i).color=colorDictionary{fluxesOfInterest{i}};
 end
-forcing_fluxes([forcing_fluxes.name] == "geostrophic_mean_flow").fancyName = "mean flow";
+forcing_fluxes([forcing_fluxes.name] == "geostrophic_mean_flow").fancyName = "mean flow forcing";
 forcing_fluxes([forcing_fluxes.name] == "quadratic_bottom_friction").fancyName = "bottom friction";
 forcing_fluxes([forcing_fluxes.name] == "adaptive_damping").fancyName = "damping";
 forcing_fluxes([forcing_fluxes.name] == "inertial_forcing").fancyName = "near-inertial forcing";

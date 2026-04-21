@@ -87,7 +87,7 @@ yticklabels([])
 zticklabels([])
 title(ax, "MFW: mean flow & wave forcing")
 if nRows==1
-    cb = colorbar
+    cb = colorbar;
     cb.Layout.Tile = 'south';
 else
     cb = colorbar("southoutside");

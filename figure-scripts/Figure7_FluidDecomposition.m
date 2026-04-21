@@ -10,5 +10,5 @@ if ~exist(figureFolder, 'dir')
 end
 
 %%
-fig = wvd.plotFluidDecompositionMultipanel(yForXZSlice=110e3,title="none",visible="off");
+fig = wvd.plotFluidDecompositionMultipanel(yForXZSlice=110e3,title="none",visible="on");
 exportgraphics(fig,figureFolder + "/" + "fluid_decomposition.png",Resolution=300)

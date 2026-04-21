@@ -24,6 +24,13 @@ wvd = wvd22;
 
 energy_fluxes = wvd.exactEnergyFluxesTemporalAverage(timeIndices=51:251);
 
+% edit fancyName
+energy_fluxes([energy_fluxes.fancyName]=="geostrophic-mean-flow").fancyName = "mean flow forcing";
+% energy_fluxes([energy_fluxes.fancyName]=="M2-tidal-forcing").fancyName = "M2 tidal forcing";
+% energy_fluxes([energy_fluxes.fancyName]=="inertial-forcing").fancyName = "near-inertial forcing";
+energy_fluxes([energy_fluxes.fancyName]=="adaptive damping").fancyName = "damping";
+energy_fluxes([energy_fluxes.fancyName]=="quadratic bottom friction").fancyName = "bottom friction";
+
 C = orderedcolors("gem"); 
 colorDictionary = dictionary("geostrophic_mean_flow",{C(3,:)});
 colorDictionary{"quadratic_bottom_friction"} = C(1,:);
@@ -56,7 +63,7 @@ set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
 fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=50,kmax=2e-3,forcingFlux=forcing_fluxes1,inertialFlux=flux_advective,addFrequencyContours=false,addKEPEContours=false);
 ax = gca;
-ax.Title.String = "energy flux, MF";
+ax.Title.String = "energy flux, MF: mean flow forcing";
 exportgraphics(fig,figureFolder + "/" + "energy_flux_exact_2D_flow_run22.png",Resolution=300)
 
 %%
@@ -64,6 +71,13 @@ exportgraphics(fig,figureFolder + "/" + "energy_flux_exact_2D_flow_run22.png",Re
 wvd = wvd18;
 
 energy_fluxes = wvd.exactEnergyFluxesTemporalAverage(timeIndices=51:251);
+
+% edit fancyName
+energy_fluxes([energy_fluxes.fancyName]=="geostrophic-mean-flow").fancyName = "mean flow forcing";
+energy_fluxes([energy_fluxes.fancyName]=="M2-tidal-forcing").fancyName = "M_2 tidal forcing";
+energy_fluxes([energy_fluxes.fancyName]=="inertial-forcing").fancyName = "near-inertial forcing";
+energy_fluxes([energy_fluxes.fancyName]=="adaptive damping").fancyName = "damping";
+energy_fluxes([energy_fluxes.fancyName]=="quadratic bottom friction").fancyName = "bottom friction";
 
 C = orderedcolors("gem"); 
 colorDictionary = dictionary("geostrophic_mean_flow",{C(3,:)});
@@ -99,7 +113,7 @@ fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransi
 set(gca,'YTickLabel',[]);
 set(gca,'YLabel',[]);
 ax = gca;
-ax.Title.String = "energy flux, MFW";
+ax.Title.String = "energy flux, MFW: mean flow & wave forcing";
 exportgraphics(fig,figureFolder + "/" + "energy_flux_exact_2D_flow_run18.png",Resolution=300)
 
 

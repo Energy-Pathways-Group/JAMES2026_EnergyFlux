@@ -75,7 +75,7 @@ if shouldShowDifference
 end
 
 cb = colorbar("eastoutside");
-cb.Label.String = "f";
+cb.Label.String = "($f$)";
 cb.Label.Interpreter = 'latex';
 
 exportgraphics(fig,figureFolder + "/" + "qgpv-apv-comparison.png",Resolution=300)

@@ -49,14 +49,16 @@ end
 enstrophy_fluxes = wvd.exactEnstrophyFluxesTemporalAverage(timeIndices =timeIndices);
 enstrophy_fluxes_quadratic = wvd.quadraticEnstrophyFluxesTemporalAverage(timeIndices =timeIndices);
 
-% rename quadratic bottom friction for legend
+% rename fluxes for legend
 enstrophy_fluxes([enstrophy_fluxes.name]=="quadratic_bottom_friction").fancyName = "bottom friction";
 enstrophy_fluxes([enstrophy_fluxes.name]=="adaptive_damping").fancyName = "damping";
-enstrophy_fluxes([enstrophy_fluxes.name]=="nonlinear_advection").fancyName = "u{\nabla}u";
+% enstrophy_fluxes([enstrophy_fluxes.name]=="nonlinear_advection").fancyName = "u{\nabla}u";
+enstrophy_fluxes([enstrophy_fluxes.name]=="geostrophic_mean_flow").fancyName = "mean flow forcing";
 
-enstrophy_fluxes([enstrophy_fluxes_quadratic.name]=="quadratic_bottom_friction").fancyName = "bottom friction";
-enstrophy_fluxes([enstrophy_fluxes_quadratic.name]=="adaptive_damping").fancyName = "damping";
-enstrophy_fluxes([enstrophy_fluxes_quadratic.name]=="nonlinear_advection").fancyName = "u{\nabla}u";
+enstrophy_fluxes_quadratic([enstrophy_fluxes_quadratic.name]=="quadratic_bottom_friction").fancyName = "bottom friction";
+enstrophy_fluxes_quadratic([enstrophy_fluxes_quadratic.name]=="adaptive_damping").fancyName = "damping";
+% enstrophy_fluxes_quadratic([enstrophy_fluxes_quadratic.name]=="nonlinear_advection").fancyName = "u{\nabla}u";
+enstrophy_fluxes_quadratic([enstrophy_fluxes_quadratic.name]=="geostrophic_mean_flow").fancyName = "mean flow forcing";
 
 % wavelength axis
 radialWavelength = 2*pi./kRadial/1000;

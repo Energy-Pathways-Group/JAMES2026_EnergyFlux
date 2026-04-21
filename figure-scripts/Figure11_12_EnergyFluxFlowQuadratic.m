@@ -22,6 +22,14 @@ end
 %%
 
 energy_fluxes = wvd.quadraticEnergyFluxesTemporalAverage(timeIndices=analysisIndices);
+
+% edit fancyName
+energy_fluxes([energy_fluxes.fancyName]=="geostrophic-mean-flow").fancyName = "mean flow forcing";
+energy_fluxes([energy_fluxes.fancyName]=="M2-tidal-forcing").fancyName = "M_2 tidal forcing";
+energy_fluxes([energy_fluxes.fancyName]=="inertial-forcing").fancyName = "near-inertial forcing";
+energy_fluxes([energy_fluxes.fancyName]=="adaptive damping").fancyName = "damping";
+energy_fluxes([energy_fluxes.fancyName]=="quadratic bottom friction").fancyName = "bottom friction";
+
 [inertial_fluxes_g, inertial_fluxes_w, ks, js] = wvd.quadraticEnergyPrimaryTriadFluxesTemporalAverage2D(timeIndices=analysisIndices,outputGrid="full");
 
 C = orderedcolors("gem"); 
@@ -50,7 +58,7 @@ forcing_fluxes(i+1).flux = inertial_fluxes_g([inertial_fluxes_g.name] == "tx-wwg
 forcing_fluxes(i+1).color = 0.0*[1 1 1];
 forcing_fluxes(i+1).relativeAmplitude = 1;
 forcing_fluxes(i+1).alpha = 0.6;
-forcing_fluxes(i+1).fancyName = "wwg";
+forcing_fluxes(i+1).fancyName = "wwg transfer";
 
 % maxAmplitude = max(arrayfun( @(v) abs(sum(v.flux(:))), forcing_fluxes));
 % maxAmplitude = max(arrayfun( @(v) max(abs(Kh(:).*v.flux(:))), forcing_fluxes));
@@ -69,7 +77,7 @@ set(gcf, 'Color', 'w');
 clear ggg
 ggg.flux = inertial_fluxes_g([inertial_fluxes_g.name] == "ggg").flux/wvd.flux_scale;
 fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=50,kmax=2e-3,forcingFlux=forcing_fluxes,inertialFlux=ggg,addKEPEContours=true);
-title("ggg")
+title("ggg cascade")
 exportgraphics(fig,figureFolder + "/" + "energy_flux_quadratic_2D_flow_geostrophic.png",Resolution=300)
 %%
 
@@ -92,7 +100,7 @@ forcing_fluxes(i+1).flux = inertial_fluxes_w([inertial_fluxes_w.name] == "tx-wwg
 forcing_fluxes(i+1).color = 0.0*[1 1 1];
 forcing_fluxes(i+1).relativeAmplitude = 1;
 forcing_fluxes(i+1).alpha = 0.6;
-forcing_fluxes(i+1).fancyName = "wwg";
+forcing_fluxes(i+1).fancyName = "wwg transfer";
 
 maxAmplitude = max(arrayfun( @(v) max(abs(v.flux(:))), forcing_fluxes));
 for i=1:length(forcing_fluxes)
@@ -106,7 +114,7 @@ set(gcf, 'Color', 'w');
 wwg.flux = inertial_fluxes_w([inertial_fluxes_w.name] == "wwg").flux/wvd.flux_scale;
 wwg.flux(isnan(wwg.flux)) = 0; % not sure why there are NaNs in this wwg...
 fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=50,kmax=2e-3,forcingFlux=forcing_fluxes,inertialFlux=wwg,addFrequencyContours=true);
-title("wwg")
+title("wwg cascade")
 exportgraphics(fig,figureFolder + "/" + "energy_flux_quadratic_2D_flow_wave_wwg.png",Resolution=300)
 
 
@@ -116,5 +124,5 @@ set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
 www.flux = inertial_fluxes_w([inertial_fluxes_w.name] == "www").flux/wvd.flux_scale;
 fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=50,kmax=2e-3,forcingFlux=forcing_fluxes,inertialFlux=www,addFrequencyContours=true);
-title("www")
+title("www cascade")
 exportgraphics(fig,figureFolder + "/" + "energy_flux_quadratic_2D_flow_wave_www.png",Resolution=300)
