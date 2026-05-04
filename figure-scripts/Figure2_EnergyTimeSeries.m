@@ -1,43 +1,20 @@
-% basedir = "/Users/Shared/CimRuns_June2025/output/";
-% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
-basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
+loadFigureDefaults;
 
-% wvd1 = WVDiagnostics(basedir + getRunParameters(1) + ".nc");
-% wvd9 = WVDiagnostics(basedir + getRunParameters(9) + ".nc");
-wvd22 = WVDiagnostics(basedir + getRunParameters(22) + ".nc");
-wvd18 = WVDiagnostics(basedir + getRunParameters(18) + ".nc");
+wvd22_256 = WVDiagnostics(basedir + getRunParameters(22) + ".nc");
+wvd18_256 = WVDiagnostics(basedir + getRunParameters(18) + ".nc");
 
 %%
-% wvd1_2x = WVDiagnostics(basedir + replace(getRunParameters(1),"256","512") + ".nc");
-wvd22_2x = WVDiagnostics(basedir + replace(getRunParameters(22),"256","512") + ".nc");
-% wvd9_2x = WVDiagnostics(basedir + replace(getRunParameters(9),"256","512") + ".nc");
-wvd18_2x = WVDiagnostics(basedir + replace(getRunParameters(18),"256","512") + ".nc");
+[E22, t22] = wvd22_256.exactEnergyOverTime();
+[E18, t18] = wvd18_256.exactEnergyOverTime();
 
-figureFolder = "./figures";
-if ~exist(figureFolder, 'dir')
-       mkdir(figureFolder)
-end
+[E22_2x, t22_2x] = wvd22.exactEnergyOverTime();
+[E18_2x, t18_2x] = wvd18.exactEnergyOverTime();
 
-%%
-% [E1, t1] = wvd1.exactEnergyOverTime();
-[E22, t22] = wvd22.exactEnergyOverTime();
-% [E9, t9] = wvd9.exactEnergyOverTime();
-[E18, t18] = wvd18.exactEnergyOverTime();
+Z22 = wvd22_256.exactEnstrophyOverTime();
+Z18 = wvd18_256.exactEnstrophyOverTime();
 
-% [E1_2x, t1_2x] = wvd1_2x.exactEnergyOverTime();
-[E22_2x, t22_2x] = wvd22_2x.exactEnergyOverTime();
-% [E9_2x, t9_2x] = wvd9_2x.exactEnergyOverTime();
-[E18_2x, t18_2x] = wvd18_2x.exactEnergyOverTime();
-
-% Z1 = wvd1.exactEnstrophyOverTime();
-Z22 = wvd22.exactEnstrophyOverTime();
-% Z9 = wvd9.exactEnstrophyOverTime();
-Z18 = wvd18.exactEnstrophyOverTime();
-
-% Z1_2x = wvd1_2x.exactEnstrophyOverTime();
-Z22_2x = wvd22_2x.exactEnstrophyOverTime();
-% Z9_2x = wvd9_2x.exactEnstrophyOverTime();
-Z18_2x = wvd18_2x.exactEnstrophyOverTime();
+Z22_2x = wvd22.exactEnstrophyOverTime();
+Z18_2x = wvd18.exactEnstrophyOverTime();
 
 figPos = [50 50 600 400];
 fig = figure(Units='points',Position=figPos);
@@ -51,22 +28,19 @@ yLimits = [0 5];
 fill([x1 x2 x2 x1], [yLimits(1) yLimits(1) yLimits(2) yLimits(2)], ...
     [0.8 0.8 0.8], 'EdgeColor', 'none', 'FaceAlpha', 0.7); hold on;
 
-% plot(t1/wvd1.tscale,E1/wvd1.escale,LineWidth=2), hold on
-plot(t22/wvd22.tscale,E22/wvd22.escale,LineWidth=2), hold on
-% plot(t9/wvd1.tscale,E9/wvd1.escale,LineWidth=2)
-plot(t18/wvd22.tscale,E18/wvd22.escale,LineWidth=2)
+plot(t22/wvd22_256.tscale,E22/wvd22_256.escale,LineWidth=2), hold on
+plot(t18/wvd22_256.tscale,E18/wvd22_256.escale,LineWidth=2)
 
 set(gca,'ColorOrderIndex',1)
-plot(t22_2x/wvd22.tscale,E22_2x/wvd22.escale,LineWidth=2), hold on
-% plot(t9_2x/wvd1.tscale,E9_2x/wvd1.escale,LineWidth=2)
-plot(t18_2x/wvd22.tscale,E18_2x/wvd22.escale,LineWidth=2)
+plot(t22_2x/wvd22_256.tscale,E22_2x/wvd22_256.escale,LineWidth=2), hold on
+plot(t18_2x/wvd22_256.tscale,E18_2x/wvd22_256.escale,LineWidth=2)
 
-ylabel("energy (" + wvd22.escale_units + ")")
+ylabel("energy (" + wvd22_256.escale_units + ")")
 set(gca,'XTick',[])
 ylim(yLimits)
 xlim([0 3250])
 
-plot([1 1]*t22_2x(1)/wvd22.tscale,ylim,LineWidth=1,Color=0*[1 1 1],LineStyle="--");
+plot([1 1]*t22_2x(1)/wvd22_256.tscale,ylim,LineWidth=1,Color=0*[1 1 1],LineStyle="--");
 plot([1 1]*3050,ylim,LineWidth=1,Color=0*[1 1 1]);
 
 
@@ -77,27 +51,22 @@ yLimits = [0 4.5];
 fill([x1 x2 x2 x1], [yLimits(1) yLimits(1) yLimits(2) yLimits(2)], ...
     [0.8 0.8 0.8], 'EdgeColor', 'none', 'FaceAlpha', 0.7); hold on;
 
-% p1 = plot(t1/wvd1.tscale,Z1/wvd1.zscale,LineWidth=2,DisplayName='MF'); hold on
-p1 = plot(t22/wvd22.tscale,Z22/wvd22.zscale,LineWidth=2,DisplayName='MF'); hold on
-% p2 = plot(t9/wvd1.tscale,Z9/wvd1.zscale,LineWidth=2,DisplayName="MFW, hydrostatic");
-p3 = plot(t18/wvd18.tscale,Z18/wvd18.zscale,LineWidth=2,DisplayName="MFW");
+p1 = plot(t22/wvd22_256.tscale,Z22/wvd22_256.zscale,LineWidth=2,DisplayName='MF'); hold on
+p3 = plot(t18/wvd18_256.tscale,Z18/wvd18_256.zscale,LineWidth=2,DisplayName="MFW");
 
 set(gca,'ColorOrderIndex',1)
-% plot(t1_2x/wvd1.tscale,Z1_2x/wvd1.zscale,LineWidth=2,DisplayName='MF'), hold on
-plot(t22_2x/wvd22.tscale,Z22_2x/wvd22.zscale,LineWidth=2,DisplayName='MF'), hold on
-% plot(t9_2x/wvd1.tscale,Z9_2x/wvd1.zscale,LineWidth=2,DisplayName="MFW, hydrostatic")
-plot(t18_2x/wvd18.tscale,Z18_2x/wvd18.zscale,LineWidth=2,DisplayName="MFW")
+plot(t22_2x/wvd22_256.tscale,Z22_2x/wvd22_256.zscale,LineWidth=2,DisplayName='MF'), hold on
+plot(t18_2x/wvd18_256.tscale,Z18_2x/wvd18_256.zscale,LineWidth=2,DisplayName="MFW")
 
-ylabel("potential enstrophy (" + wvd22.zscale_units + ")")
+ylabel("potential enstrophy (" + wvd22_256.zscale_units + ")")
 ylim(yLimits)
 xlim([0 3250])
 
-xlabel("time (" + wvd22.tscale_units + ")")
+xlabel("time (" + wvd22_256.tscale_units + ")")
 
-p4 = plot([1 1]*t22_2x(1)/wvd22.tscale,ylim,LineWidth=1,Color=0*[1 1 1],LineStyle="--",DisplayName='doubling');
+p4 = plot([1 1]*t22_2x(1)/wvd22_256.tscale,ylim,LineWidth=1,Color=0*[1 1 1],LineStyle="--",DisplayName='doubling');
 p5 = plot([1 1]*3050,ylim,LineWidth=1,Color=0*[1 1 1],DisplayName='start of analysis');
 
-% legend([p1,p2,p3,p4,p5],{'hydrostatic, geostrophic (HS-G)','hydrostatic, geostrophic + wave (HS-GW)','non-hydrostatic, geostrophic + wave (NHS-GW)','doubling','start of analysis'},Location='southwest')
 legend([p1,p3,p4,p5],Location='southwest')
 
-exportgraphics(fig,figureFolder + "/" + "energy_time_series.png",Resolution=300)
+exportgraphics(fig,figureFolder + "/" + "Figure02_energy_time_series.png",Resolution=300)

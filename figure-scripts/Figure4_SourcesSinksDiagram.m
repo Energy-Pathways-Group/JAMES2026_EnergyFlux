@@ -1,16 +1,8 @@
-% basedir = "/Users/Shared/CimRuns_June2025/output/";
-% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
-basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
+loadFigureDefaults
 
 wvd1 = WVDiagnostics(basedir + replace(getRunParameters(1),"256","512") + ".nc");
-wvd22 = WVDiagnostics(basedir + replace(getRunParameters(22),"256","512") + ".nc");
 wvd9 = WVDiagnostics(basedir + replace(getRunParameters(9),"256","512") + ".nc");
-wvd18 = WVDiagnostics(basedir + replace(getRunParameters(18),"256","512") + ".nc");
 
-figureFolder = "./figures";
-if ~exist(figureFolder, 'dir')
-       mkdir(figureFolder)
-end
 
 %%
 custom_names = configureDictionary("string","cell");
