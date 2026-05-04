@@ -1,15 +1,6 @@
-% basedir = "/Users/Shared/CimRuns_June2025/output/";
-% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
-% basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
-basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
+loadFigureDefaults
+wvd = wvd18;
 
-figureFolder = "./figures";
-if ~exist(figureFolder, 'dir')
-    mkdir(figureFolder)
-end
-
-runNumber=18;
-wvd = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
 timeIndices = 51:251;
 
 
@@ -190,4 +181,4 @@ xlabel(gca,xaxislabel);
 % text(ax,max(xlim)*.95,max(ylim),'b)','FontSize',14,'HorizontalAlignment','left','VerticalAlignment','top')
 
 
-exportgraphics(fig,figureFolder + "/" + "enstrophy_flux1D.png",Resolution=300)
+exportgraphics(fig,figureFolder + "/" + "Figure15_enstrophy_flux1D.png",Resolution=300)

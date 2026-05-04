@@ -1,23 +1,4 @@
-% basedir = "/Users/Shared/CimRuns_June2025/output/";
-% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
-% basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
-basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
-
-runNumber=1; runName = "hydrostatic: geostrophic";
-wvd1 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
-
-runNumber=22; runName = "non-hydrostatic: geostrophic";
-wvd22 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
-
-runNumber=18; runName = "non-hydrostatic: geostrophic + waves";
-wvd18 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
-
-figureFolder = "./figures";
-if ~exist(figureFolder, 'dir')
-       mkdir(figureFolder)
-end
-
-%%
+loadFigureDefaults
 
 wvd = wvd22;
 enstrophy_fluxes = wvd.exactEnstrophyFluxesTemporalAverage(timeIndices=51:251);
@@ -115,3 +96,5 @@ set(gca,'YLabel',[]);
 ax = gca;
 ax.Title.String = "potential enstrophy flux, MFW: mean flow & wave forcing";
 exportgraphics(fig,figureFolder + "/" + "enstrophy_flux_exact_2D_flow_run18.png",Resolution=300)
+
+combinePngsHorizontally(figureFolder + "/" + "enstrophy_flux_exact_2D_flow_run22.png", figureFolder + "/" + "enstrophy_flux_exact_2D_flow_run18.png", figureFolder + "/" + "Figure06_enstrophy_flux_exact_2D_flow.png", HorizontalSpacing=40)

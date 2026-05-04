@@ -1,23 +1,4 @@
-% basedir = "/Users/Shared/CimRuns_June2025/output/";
-% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
-% basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
-% basedir = '/Users/cwortham/Documents/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns/output/';
-basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
-
-
-% wvd1 = WVDiagnostics(basedir + replace(getRunParameters(1),"256","512") + ".nc");
-wvd22 = WVDiagnostics(basedir + replace(getRunParameters(22),"256","512") + ".nc");
-% wvd9 = WVDiagnostics(basedir + replace(getRunParameters(9),"256","512") + ".nc");
-wvd18 = WVDiagnostics(basedir + replace(getRunParameters(18),"256","512") + ".nc");
-
-figureFolder = "./figures";
-if ~exist(figureFolder, 'dir')
-       mkdir(figureFolder)
-end
-
-
-% wvd.plotEnstrophyFluxTemporalAverage(approximation="exact",timeIndices=51:251,overSaturationFactor=100);
-
+loadFigureDefaults
 %%
 
 wvd = wvd22;
@@ -117,3 +98,4 @@ ax.Title.String = "energy flux, MFW: mean flow & wave forcing";
 exportgraphics(fig,figureFolder + "/" + "energy_flux_exact_2D_flow_run18.png",Resolution=300)
 
 
+combinePngsHorizontally(figureFolder + "/" + "energy_flux_exact_2D_flow_run22.png", figureFolder + "/" + "energy_flux_exact_2D_flow_run18.png", figureFolder + "/" + "Figure05_energy_flux_exact_2D_flow.png", HorizontalSpacing=40)

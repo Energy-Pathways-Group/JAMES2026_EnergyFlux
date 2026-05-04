@@ -1,0 +1,18 @@
+% Build all manuscript figures.
+%
+% Run this script from the `figure-scripts` folder to regenerate figures 1-15.
+
+Figure1_ThreeSimComparison
+Figure2_EnergyTimeSeries
+Figure3_MooringSpectra
+Figure4_SourcesSinksDiagram
+Figure5_EnergyFluxFlowExact
+Figure6_EnstrophyFluxFlowExact
+Figure7_FluidDecomposition
+Figure8_EnergySpectrum
+Figure9_MooringSpectraDecomposed
+Figure10_EnergyFluxDecomposed1D
+Figure11_12_EnergyFluxFlowQuadratic
+Figure13_QGPVandAPVComparison
+Figure14_EnstrophySpectra
+Figure15_EnstrophyFluxesDecomposed1D

@@ -1,25 +1,8 @@
-% basedir = "/Users/Shared/CimRuns_June2025/output/";
-% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
-% basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
-% basedir = '/Users/cwortham/Documents/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns/output/';
-basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
-
-figureFolder = "./figures";
-if ~exist(figureFolder, 'dir')
-       mkdir(figureFolder)
-end
-
-% runNumber=1;
-% wvd1 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
-
-runNumber=22;
-wvd22 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
-
-runNumber=18;
-wvd18 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
+loadFigureDefaults
 
 wvdArray = {wvd22,wvd18};
 runNames = {"MF","MFW"};
+shouldUseTrueNoMotionProfile = true;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -70,6 +53,7 @@ for iWVD=1:length(wvdArray)
     else
         wvt = wvd.wvt;
     end
+    wvt.shouldUseTrueNoMotionProfile = shouldUseTrueNoMotionProfile;
 
 gmf = wvt.forcingWithName("geostrophic-mean-flow");
 forcingIndex = gmf.A0_indices(2);
@@ -226,7 +210,7 @@ forcingPseudoWavelength = 2*pi/sqrt(Kp2)/1000;
 
 end
 
-exportgraphics(fig,figureFolder + "/" + "enstrophy_spectrum1D_simple.png",Resolution=300)
+exportgraphics(fig,figureFolder + "/" + "Figure14_enstrophy_spectrum1D_simple.png",Resolution=300)
 
 
 function [TZ_Error_kR,TZ_Error_j,TZ_Error_kPseudo] = errorSpectra(wvd,pvA,pvB)

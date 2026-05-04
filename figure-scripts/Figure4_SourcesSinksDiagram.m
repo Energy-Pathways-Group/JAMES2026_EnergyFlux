@@ -112,3 +112,4 @@ exportgraphics(fig1,figureFolder + "/" + "sources_sinks_run1.png",Resolution=300
 exportgraphics(fig22,figureFolder + "/" + "sources_sinks_run22.png",Resolution=300)
 exportgraphics(fig9,figureFolder + "/" + "sources_sinks_run9.png",Resolution=300)
 exportgraphics(fig18,figureFolder + "/" + "sources_sinks_run18.png",Resolution=300)
+combinePngsHorizontally(figureFolder + "/" + "sources_sinks_run22.png", figureFolder + "/" + "sources_sinks_run18.png", figureFolder + "/" + "Figure04_SourcesSinksDiagram.png", HorizontalSpacing=400)

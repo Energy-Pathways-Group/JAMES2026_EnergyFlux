@@ -1,23 +1,7 @@
-% basedir = "/Users/Shared/CimRuns_June2025/output/";
-% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
-% basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
-basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
+loadFigureDefaults
+wvd = wvd18;
 
-% runNumber=18; runName = "non-hydrostatic: geostrophic + waves";
-% wvd18 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
-% analysisIndices = 51:251;
-
-runNumber=18; runName = "non-hydrostatic: geostrophic + waves";
-wvd = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
-analysisIndices = 2751:3001;
 analysisIndices = 51:251;
-
-figureFolder = "./figures";
-if ~exist(figureFolder, 'dir')
-       mkdir(figureFolder)
-end
-
-
 
 %%
 
@@ -78,7 +62,7 @@ clear ggg
 ggg.flux = inertial_fluxes_g([inertial_fluxes_g.name] == "ggg").flux/wvd.flux_scale;
 fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=50,kmax=2e-3,forcingFlux=forcing_fluxes,inertialFlux=ggg,addKEPEContours=true);
 title("ggg cascade")
-exportgraphics(fig,figureFolder + "/" + "energy_flux_quadratic_2D_flow_geostrophic.png",Resolution=300)
+exportgraphics(fig,figureFolder + "/" + "Figure11_energy_flux_quadratic_2D_flow_geostrophic.png",Resolution=300)
 %%
 
 % fluxesOfInterest = {"adaptive_damping","inertial_forcing","M2_tidal_forcing","quadratic_bottom_friction"};
@@ -115,7 +99,7 @@ wwg.flux = inertial_fluxes_w([inertial_fluxes_w.name] == "wwg").flux/wvd.flux_sc
 wwg.flux(isnan(wwg.flux)) = 0; % not sure why there are NaNs in this wwg...
 fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=50,kmax=2e-3,forcingFlux=forcing_fluxes,inertialFlux=wwg,addFrequencyContours=true);
 title("wwg cascade")
-exportgraphics(fig,figureFolder + "/" + "energy_flux_quadratic_2D_flow_wave_wwg.png",Resolution=300)
+exportgraphics(fig,figureFolder + "/" + "Figure12a_energy_flux_quadratic_2D_flow_wave_wwg.png",Resolution=300)
 
 
 %%
@@ -124,5 +108,9 @@ set(gcf,'PaperPositionMode','auto')
 set(gcf, 'Color', 'w');
 www.flux = inertial_fluxes_w([inertial_fluxes_w.name] == "www").flux/wvd.flux_scale;
 fig = wvd.plotPoissonFlowOverContours(figureHandle=fig,vectorDensityLinearTransitionWavenumber=10^(-3.9),quiverScale=3,jmax=50,kmax=2e-3,forcingFlux=forcing_fluxes,inertialFlux=www,addFrequencyContours=true);
+set(gca,'YTickLabel',[]);
+set(gca,'YLabel',[]);
 title("www cascade")
-exportgraphics(fig,figureFolder + "/" + "energy_flux_quadratic_2D_flow_wave_www.png",Resolution=300)
+exportgraphics(fig,figureFolder + "/" + "Figure12b_energy_flux_quadratic_2D_flow_wave_www.png",Resolution=300)
+
+combinePngsHorizontally(figureFolder + "/" + "Figure12a_energy_flux_quadratic_2D_flow_wave_wwg.png", figureFolder + "/" + "Figure12b_energy_flux_quadratic_2D_flow_wave_www.png", figureFolder + "/" + "Figure12_energy_flux_quadratic_2D_flow_wave.png", HorizontalSpacing=40)

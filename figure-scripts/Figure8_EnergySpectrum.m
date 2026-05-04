@@ -1,26 +1,5 @@
-% basedir = "/Users/Shared/CimRuns_June2025/output/";
-% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
-% basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
-basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
+loadFigureDefaults
 
-figureFolder = "./figures";
-if ~exist(figureFolder, 'dir')
-       mkdir(figureFolder)
-end
-
-% runNumber=1; runName = "hydrostatic: geostrophic";
-% wvd1 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
-
-runNumber=22; runName = "non-hydrostatic: geostrophic";
-wvd22 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
-
-% runNumber=9; runName = "hydrostatic: geostrophic + waves";
-% wvd9 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
-
-runNumber=18; runName = "non-hydrostatic: geostrophic + waves";
-wvd18 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
-
-% wvdArray = {wvd1,wvd9,wvd18};
 wvdArray = {wvd22,wvd18};
 
 %%
@@ -207,9 +186,9 @@ nexttile(1)
 legend([p(1), p(2) p(3) p(4)],'MF: geostrophic','MF: wave','MFW: geostrophic','MFW: wave')
 
 if shouldShowPseudoRadialPlot
-    exportgraphics(fig,figureFolder + "/" + "energy_spectrum_3panel.png",Resolution=300)
+    exportgraphics(fig,figureFolder + "/" + "Figure08_energy_spectrum_3panel.png",Resolution=300)
 else
-    exportgraphics(fig,figureFolder + "/" + "energy_spectrum_simple.png",Resolution=300)
+    exportgraphics(fig,figureFolder + "/" + "Figure08_energy_spectrum_simple.png",Resolution=300)
 end
 
 % nexttile(2)

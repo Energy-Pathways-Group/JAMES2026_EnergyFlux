@@ -1,17 +1,7 @@
-% basedir = "/Users/Shared/CimRuns_June2025/output/";
-% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
-basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
-
-wvd = WVDiagnostics(basedir + replace(getRunParameters(18),"256","512") + ".nc");
+loadFigureDefaults
+wvd = wvd18;
 wvt = wvd.wvt;
-
-figureFolder = "./figures";
-if ~exist(figureFolder, 'dir')
-    mkdir(figureFolder)
-end
-
-%%
-
+wvt.shouldUseTrueNoMotionProfile = true;
 shouldShowDifference = true;
 
 if shouldShowDifference
@@ -78,4 +68,4 @@ cb = colorbar("eastoutside");
 cb.Label.String = "($f$)";
 cb.Label.Interpreter = 'latex';
 
-exportgraphics(fig,figureFolder + "/" + "qgpv-apv-comparison.png",Resolution=300)
+exportgraphics(fig,figureFolder + "/" + "Figure13_qgpv-apv-comparison.png",Resolution=300)

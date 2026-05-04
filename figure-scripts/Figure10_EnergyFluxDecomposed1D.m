@@ -1,31 +1,6 @@
-% basedir = "/Users/Shared/CimRuns_June2025/output/";
-% basedir = "/Users/jearly/Dropbox/CimRuns_June2025/output/";
-% basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
-basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
+loadFigureDefaults
+wvd = wvd18;
 
-% runNumber=1; runName = "hydrostatic: geostrophic";
-% runNumber=9; runName = "hydrostatic: geostrophic + waves";
-% runNumber=18; runName = "non-hydrostatic: geostrophic + waves";
-% wvd = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
-% wvd = WVDiagnostics("/Volumes/Samsung_T7/CimRuns_June2025/output/run1_icR_iner0_tide0_lat32_geo0065_N0052_hydrostatic_res512_duplicate.nc");
-
-figureFolder = "./figures";
-if ~exist(figureFolder, 'dir')
-       mkdir(figureFolder)
-end
-
-% runNumber=1; runName = "hydrostatic: geostrophic";
-% wvd1 = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
-
-% runNumber=9; runName = "hydrostatic: geostrophic + waves";
-% wvd = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
-% analysisTimes = 51:251;
-% analysisTimes = 2751:3000;
-
-runNumber=18; runName = "non-hydrostatic: geostrophic + waves";
-wvd = WVDiagnostics(basedir + replace(getRunParameters(runNumber),"256","512") + ".nc");
-
-%%
 analysisTimes = 51:251;
 
 shouldSaveFigure = true;
@@ -56,5 +31,5 @@ forcing_fluxes([forcing_fluxes.name] == "M2_tidal_forcing").fancyName = "$M_2$ t
 fig = wvd.plotEnergyFluxes1D(timeIndices=analysisTimes,forcingFluxAttributes=forcing_fluxes);
 
 if shouldSaveFigure
-    exportgraphics(fig,figureFolder + "/" + "energy_flux_1D_simple.png",Resolution=300)
+    exportgraphics(fig,figureFolder + "/" + "Figure10_energy_flux_1D_simple.png",Resolution=300)
 end

@@ -1,19 +1,9 @@
-% basedir = "/Users/Shared/CimRuns_June2025/output/";
-% basedir = "/Volumes/Samsung_T7/CimRuns_June2025/output/";
-basedir = '/Volumes/SanDiskExtremePro/research/Energy-Pathways-Group/garrett-munk-spin-up/CimRuns_November2025/output/';
-
-
-wvd = WVDiagnostics(basedir + replace(getRunParameters(18),"256","512") + ".nc");
-
-figureFolder = "./figures";
-if ~exist(figureFolder, 'dir')
-    mkdir(figureFolder)
-end
-
-%%
+loadFigureDefaults
+wvd = wvd18;
 
 % colors
 C = orderedcolors("gem"); 
+clear col;
 col.waveBold = C(5,:);
 col.geoBold = C(6,:);
 
@@ -86,5 +76,5 @@ text(ax1,(2*pi/M2Period+wvd.wvt.f)*86400/2/pi,textY,'f+M2','Color','k','Horizont
 text(ax1,sqrt(wvd.wvt.N2(depthIndices(1)))*86400/2/pi,textY,'N(2500m)','Color','k','HorizontalAlignment','left','FontWeight','bold')
 
 
-exportgraphics(fig,figureFolder + "/" + "moorings_decomposed.png",Resolution=300)
+exportgraphics(fig,figureFolder + "/" + "Figure09_moorings_decomposed.png",Resolution=300)
 
