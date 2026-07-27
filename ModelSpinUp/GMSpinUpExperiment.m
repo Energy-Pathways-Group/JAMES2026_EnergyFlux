@@ -235,11 +235,8 @@ end
 
 % Geostrophic flow
 if addGeostrophicFlow
-    % load ncfile for QGSpinUp run
-    % ncfile = NetCDFFile(fullfile('output',sprintf('QGSpinup%d.nc',lat)));
-    ncfile = NetCDFFile(fullfile('output',runNameQG));
     % Add geostrophic flow
-    wvtQG = WVTransform.waveVortexTransformFromFile(ncfile.path, iTime=Inf);
+    wvtQG = WVTransform.waveVortexTransformFromFile(fullfile('output',runNameQG),iTime=Inf);
     % wvtQG = wvtQG.waveVortexTransformWithResolution([Nx,Ny,Nz]); % force it to match resolution
     % spinup at double resolution
     % if doubleResolution
@@ -253,7 +250,6 @@ if addGeostrophicFlow
     forcing = wvtQG.forcingWithName("geostrophic-mean-flow");
     forcing = forcing.forcingWithResolutionOfTransform(wvt); % make it compatible with hydrostatic wvt
     wvt.addForcing(forcing);
-    ncfile.close
 else
     % No geostrophic flow or forcing
     wvt.removeAllGeostrophicMotions;
@@ -375,5 +371,4 @@ exportgraphics(gcf,fullfile(figFolder,sprintf('Summary_run%d.png',runNumber)), '
 % wvt.summarizeForcing
 % wvt.summarizeDegreesOfFreedom
 % wvt.summarizeVariables
-
 
